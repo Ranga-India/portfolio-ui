@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Reset */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Google Font */
+    background-color: #f3f4f6; /* Light gray background */
+}
