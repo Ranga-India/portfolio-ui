@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DevMinimalistComponent } from './dev-minimalist.component';
+import { CardPreviewComponent } from './card-preview.component';
 
-describe('DevMinimalistComponent', () => {
-  let component: DevMinimalistComponent;
-  let fixture: ComponentFixture<DevMinimalistComponent>;
+describe('CardPreviewComponent', () => {
+  let component: CardPreviewComponent;
+  let fixture: ComponentFixture<CardPreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DevMinimalistComponent]
+      imports: [CardPreviewComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DevMinimalistComponent);
+    fixture = TestBed.createComponent(CardPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

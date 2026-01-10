@@ -1,16 +1,21 @@
 import { Routes } from '@angular/router';
+import { LandingComponent } from './features/landing/landing.component';
 import { LoginComponent } from './features/auth/login/login.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { CreatePortfolioComponent } from './features/portfolio/create-portfolio/create-portfolio.component';
 import { EditorComponent } from './features/editor/editor.component';
 import { PublicViewComponent } from './features/public-view/public-view.component';
+// import { authGuard } from './core/guards/auth.guard'; // (If you have one)
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'create', component: CreatePortfolioComponent },
-  { path: 'editor/:id', component: EditorComponent },   
+  
+  // Protected Route (Where users edit)
+  { path: 'editor', component: EditorComponent }, 
+
+  // Public Route (Where the world sees the card)
+  // We use '/p/:slug' to avoid conflicts with app routes like '/login'
   { path: 'p/:slug', component: PublicViewComponent },
-  // We will add 'dashboard' here later
+
+  // Catch-all (Redirect to Home)
+  { path: '**', redirectTo: '' }
 ];

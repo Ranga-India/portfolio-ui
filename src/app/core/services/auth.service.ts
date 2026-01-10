@@ -43,7 +43,7 @@ export class AuthService {
     await this.supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard` // Redirect back to our app
+        redirectTo: `${window.location.origin}/editor` // Redirect back to our app
       }
     });
   }

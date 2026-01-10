@@ -1,111 +1,197 @@
-<div class="h-screen flex flex-col bg-gray-100 overflow-hidden" *ngIf="!isLoading">
-  
-    <nav class="bg-white border-b px-4 h-14 flex items-center justify-between shrink-0 z-10">
-      <div class="flex items-center gap-3">
-        <a routerLink="/dashboard" class="text-gray-500 hover:text-gray-800">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        </a>
-        <span class="font-bold text-gray-800">{{ portfolio.slug }}</span>
-        <span class="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-500">{{ isSaving ? 'Saving...' : 'Saved' }}</span>
-      </div>
+<div class="h-screen flex bg-white overflow-hidden font-sans" *ngIf="!isLoading">
+
+    <div class="w-full md:w-[450px] flex flex-col border-r border-gray-200 bg-white z-20 shadow-xl overflow-y-auto">
       
-      <div class="md:hidden flex bg-gray-100 rounded p-1">
-        <button (click)="activeTab='editor'" [class.bg-white]="activeTab==='editor'" class="px-3 py-1 text-sm rounded transition shadow-sm">Edit</button>
-        <button (click)="activeTab='preview'" [class.bg-white]="activeTab==='preview'" class="px-3 py-1 text-sm rounded transition shadow-sm">Preview</button>
-      </div>
-  
-      <div class="flex items-center gap-3">
-        <button 
-            *ngIf="portfolio.is_published"
-            (click)="viewLive()"
-            class="text-gray-600 hover:text-blue-600 text-sm font-medium flex items-center gap-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            View Live
-        </button>
-    
-        <button 
-            (click)="togglePublish()"
-            [class.bg-green-600]="!portfolio.is_published"
-            [class.hover:bg-green-700]="!portfolio.is_published"
-            [class.bg-red-500]="portfolio.is_published"
-            [class.hover:bg-red-600]="portfolio.is_published"
-            class="text-white px-4 py-1.5 rounded text-sm font-medium transition-colors">
-            {{ portfolio.is_published ? 'Unpublish' : 'Publish Now' }}
-        </button>
-    </div>    </nav>
-  
-    <div class="flex-1 flex overflow-hidden">
-      
-      <div class="w-full md:w-1/3 lg:w-1/4 bg-white border-r overflow-y-auto" [class.hidden]="activeTab==='preview'">
-        <div class="p-6">
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Content Editor</h2>
-          
-          <form [formGroup]="form">
-             <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: form }"></ng-container>
-          </form>
+      <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-black rounded flex items-center justify-center text-white font-bold text-xs">C</div>
+          <span class="font-bold text-gray-900">Card.io</span>
         </div>
+     <div class="flex items-center gap-3">
+
+  <div class="relative group" *ngIf="profile.is_published">
+    <button 
+      (click)="profile.is_published = false; triggerSave()"
+      class="text-xs bg-red-50 text-red-600 border border-red-100 px-3 py-1.5 rounded-md font-bold hover:bg-red-100 transition flex items-center gap-1">
+      <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+      Unpublish
+    </button>
+ 
+  </div>
+
+  <div class="relative group" *ngIf="!profile.is_published">
+    <button 
+      (click)="profile.is_published = true; triggerSave()"
+      class="text-xs bg-green-600 text-white border border-green-600 px-3 py-1.5 rounded-md font-bold hover:bg-green-700 transition shadow-sm shadow-green-200">
+      Publish Now
+    </button>
+ 
+  </div>
+
+  <div class="h-4 w-px bg-gray-200 mx-1"></div>
+
+  <button (click)="viewPublic()" 
+      [disabled]="!profile.is_published"
+      [class.opacity-40]="!profile.is_published"
+      [class.cursor-not-allowed]="!profile.is_published"
+      class="text-gray-600 hover:text-black transition flex items-center gap-1 disabled:hover:text-gray-600">
+      <span class="text-xs font-bold">View Live</span>
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+  </button>
+
+</div>
       </div>
   
-      <div class="flex-1 bg-gray-100 flex items-center justify-center p-4 md:p-8" >
-        
-        <div class="w-full h-full max-w-5xl bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col border border-gray-300">
-          <div class="bg-gray-50 border-b px-4 py-2 flex items-center gap-2">
-             <div class="flex gap-1.5">
-               <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-               <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-               <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-             </div>
-             <div class="flex-1 bg-white border rounded text-xs text-gray-500 text-center py-1 mx-4">
-               your-portfolio.com/{{ portfolio.slug }}
-             </div>
-          </div>
+      <div class="p-6 space-y-8 pb-20">
   
-          <div class="flex-1 overflow-y-auto relative">
-             <app-dev-minimalist [data]="form.value"></app-dev-minimalist>
+        <section>
+          <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Profile Basics</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name</label>
+              <input [(ngModel)]="profile.full_name" (ngModelChange)="onNameChange($event)" type="text" 
+                     class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition" placeholder="e.g. Jane Doe">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Headline</label>
+              <input [(ngModel)]="profile.headline" (ngModelChange)="triggerSave()" type="text" 
+                     class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition" placeholder="e.g. Product Designer">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Location</label>
+                <input [(ngModel)]="profile.location" (ngModelChange)="triggerSave()" type="text" 
+                       class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition" placeholder="e.g. Indira Nagar, Bengaluru">
+              </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Bio</label>
+              <textarea [(ngModel)]="profile.bio" (ngModelChange)="triggerSave()" rows="3" 
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition resize-none" placeholder="Tell your story..."></textarea>
+            </div>
+            <div class="mb-6">
+                <label class="block text-xs font-semibold text-gray-700 mb-2">Hashtags</label>
+              
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <button *ngFor="let tag of ['OpenToWork', 'Freelancer', 'Developer', 'Designer', 'ForHire']"
+                          (click)="addHashtag(tag)"
+                          type="button"
+                          class="text-[10px] bg-gray-50 hover:bg-black hover:text-white px-2 py-1 rounded-full transition-colors border border-gray-200 font-medium">
+                    + {{ tag }}
+                  </button>
+                </div>
+              
+                <div class="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-2 focus-within:ring-2 focus-within:ring-black focus-within:border-transparent transition-all">
+                  <span class="text-gray-400 text-sm pl-1 font-bold">#</span>
+                  <input type="text" 
+                         #hashtagInput
+                         (keydown.enter)="addHashtag(hashtagInput.value); hashtagInput.value=''"
+                         placeholder="Add a tag and hit Enter..."
+                         class="flex-1 bg-transparent py-2 text-sm focus:outline-none placeholder-gray-400 text-gray-800">
+                  <button (click)="addHashtag(hashtagInput.value); hashtagInput.value=''"
+                          type="button"
+                          class="text-[10px] font-bold text-gray-500 hover:text-black px-2 py-1">
+                      ADD
+                  </button>
+                </div>
+              
+                <div class="flex flex-wrap gap-2 mt-3 min-h-[24px]">
+                  <span *ngFor="let tag of profile.hashtags; let i = index" 
+                        class="inline-flex items-center gap-1 bg-gray-900 text-white text-[10px] px-2 py-1 rounded-md shadow-sm animate-in fade-in zoom-in duration-200">
+                    {{ tag }}
+                    <button (click)="removeHashtag(i)" type="button" class="hover:text-red-300 ml-1 p-0.5 rounded-full hover:bg-white/20 transition">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                  </span>
+                  
+                  <span *ngIf="(!profile.hashtags || profile.hashtags.length === 0)" class="text-[10px] text-gray-400 italic py-1">
+                      No hashtags added yet.
+                  </span>
+                </div>
+                
+                <p class="text-[10px] text-gray-300 mt-1 text-right">{{ profile.hashtags?.length || 0 }}/5 tags</p>
+              </div>
+            <div class="mb-6">
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Public Url</label>
+                
+                <div class="flex rounded-lg bg-gray-50 border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-black focus-within:border-transparent transition-all">
+                   <span class="px-3 py-2 text-gray-400 text-sm border-r border-gray-200 bg-gray-100 select-none">card.io/</span>
+                   <input [(ngModel)]="profile.slug" (ngModelChange)="triggerSave()" type="text" 
+                          class="flex-1 bg-transparent px-3 py-2 text-sm focus:outline-none placeholder-gray-300 text-gray-800 font-medium" 
+                          placeholder="username">
+                </div>
+            
+                <div *ngIf="suggestedSlugs.length > 0" class="mt-3 animate-fade-in">
+                    <p class="text-[10px] uppercase font-bold text-gray-400 mb-2">Available Suggestions:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button *ngFor="let slug of suggestedSlugs" 
+                                (click)="applySlug(slug)"
+                                class="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full border border-blue-100 hover:bg-blue-100 hover:border-blue-200 transition-colors font-medium cursor-pointer flex items-center gap-1">
+                            {{ slug }}
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
           </div>
-        </div>
+        </section>
+  
+        <section>
+          <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Choose Style</h3>
+          <div class="grid grid-cols-3 gap-3">
+              <button (click)="toggleTheme('minimal_light')" 
+                  [class.ring-2]="profile.theme_id === 'minimal_light'"
+                  class="aspect-video rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition ring-black ring-offset-2 flex flex-col items-center justify-center gap-1 group">
+                  <div class="w-8 h-5 bg-white border border-gray-200 shadow-sm rounded"></div>
+                  <span class="text-[10px] font-medium text-gray-500 group-hover:text-black">Minimal</span>
+              </button>
+  
+              <button (click)="toggleTheme('dark_modern')"
+                  [class.ring-2]="profile.theme_id === 'dark_modern'"
+                  class="aspect-video rounded-lg border border-gray-800 bg-gray-900 hover:bg-gray-800 transition ring-black ring-offset-2 flex flex-col items-center justify-center gap-1 group">
+                  <div class="w-8 h-5 bg-gray-700 border border-gray-600 shadow-sm rounded"></div>
+                  <span class="text-[10px] font-medium text-gray-400 group-hover:text-white">Dark</span>
+              </button>
+  
+              <button (click)="toggleTheme('glass_morphism')"
+                  [class.ring-2]="profile.theme_id === 'glass_morphism'"
+                  class="aspect-video rounded-lg border border-purple-200 bg-gradient-to-br from-indigo-100 to-purple-100 hover:opacity-80 transition ring-black ring-offset-2 flex flex-col items-center justify-center gap-1 group">
+                  <div class="w-8 h-5 bg-white/40 border border-white/50 shadow-sm rounded backdrop-blur-sm"></div>
+                  <span class="text-[10px] font-medium text-indigo-500 group-hover:text-indigo-700">Glass</span>
+              </button>
+          </div>
+        </section>
+  
+        <section>
+          <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Social Links</h3>
+          <div class="space-y-3">
+              <div *ngFor="let link of profile.social_links" class="flex items-center gap-3 bg-white p-2 rounded-lg border border-gray-100 shadow-sm hover:border-gray-300 transition group">
+                  <input type="checkbox" [(ngModel)]="link.active" (change)="triggerSave()" class="w-4 h-4 text-black rounded border-gray-300 focus:ring-black cursor-pointer">
+                  
+                  <div class="w-20 text-xs font-bold text-gray-700 capitalize">{{ link.platform }}</div>
+                  
+                  <input [(ngModel)]="link.url" (ngModelChange)="triggerSave()" [disabled]="!link.active" 
+                         type="text" class="flex-1 text-xs border-none focus:ring-0 bg-transparent text-gray-600 placeholder-gray-300 disabled:opacity-50" 
+                         placeholder="https://...">
+              </div>
+          </div>
+        </section>
   
       </div>
-  
     </div>
+  
+    <div class="hidden md:flex flex-1 bg-gray-100 relative overflow-hidden items-center justify-center">
+      <div class="absolute inset-0 opacity-[0.03]" 
+           style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+  
+      <div class="w-full h-full flex items-center justify-center scale-90 lg:scale-100 transition-transform">
+          <app-card-preview [profile]="profile"></app-card-preview>
+      </div>
+    </div>
+  
   </div>
   
-  <div *ngIf="isLoading" class="h-screen flex items-center justify-center">
-    Loading Editor...
-  </div>
-  
-  <ng-template #recursiveList let-controlGroup>
-    
-    <div class="space-y-4">
-      <div *ngFor="let key of getKeys(controlGroup)">
-        
-        <div *ngIf="isControl(controlGroup.get(key))" class="mb-4">
-           <label class="block text-xs font-bold text-gray-500 mb-1 capitalize">{{ key.replace('_', ' ') }}</label>
-           <input 
-              [formControl]="$any(controlGroup.get(key))" 
-              class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm p-2 border" 
-              type="text">
-        </div>
-  
-        <div *ngIf="isGroup(controlGroup.get(key))" class="border-l-2 border-blue-100 pl-3 mb-4">
-          <h3 class="text-sm font-bold text-gray-800 mb-2 capitalize">{{ key }}</h3>
-          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: getAsGroup(controlGroup.get(key)) }"></ng-container>
-        </div>
-  
-        <div *ngIf="isArray(controlGroup.get(key))" class="mb-6">
-          <h3 class="text-sm font-bold text-gray-800 mb-2 capitalize">{{ key }}</h3>
-          
-          <div *ngFor="let item of getAsArray(controlGroup.get(key)).controls; let i = index" class="bg-gray-50 p-3 rounded mb-2 border">
-             <div class="text-xs text-right text-gray-400 mb-1">Item {{i+1}}</div>
-             <ng-container *ngIf="isGroup(item)">
-               <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: getAsGroup(item) }"></ng-container>
-             </ng-container>
-             <ng-container *ngIf="isControl(item)">
-               <input [formControl]="$any(item)" class="w-full border p-1 text-sm rounded">
-             </ng-container>
-          </div>
-          </div>
-  
-      </div>
+  <div *ngIf="isLoading" class="h-screen flex items-center justify-center bg-white">
+    <div class="animate-pulse flex flex-col items-center gap-3">
+      <div class="w-8 h-8 bg-gray-200 rounded"></div>
+      <div class="text-xs text-gray-400 font-medium">Loading Editor...</div>
     </div>
-  </ng-template>
+  </div>
