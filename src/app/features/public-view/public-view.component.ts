@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -29,7 +29,7 @@ import { CardPreviewComponent } from '../card-preview/card-preview.component';
     </div>
 
     <div *ngIf="profile" class="min-h-screen w-full">
-      <app-card-preview [profile]="profile"></app-card-preview>
+      <app-card-preview [isLiveMode]="true" [profile]="profile"></app-card-preview>
     </div>
   `
 })
