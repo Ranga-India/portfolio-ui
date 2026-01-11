@@ -63,7 +63,8 @@ import { QRCodeComponent } from 'angularx-qrcode';
                 'md:border-r border-white/10': profile.theme_id === 'glass_morphism' && previewMode === 'desktop'
              }">
           
-          <div class="relative mb-6 group flex justify-center" [ngClass]="{'md:justify-start': previewMode === 'desktop'}">
+          <div class="relative mb-6 flex justify-center gap-4" [ngClass]="{'md:justify-start': previewMode === 'desktop'}">
+            <div class="group relative">
             <ng-container *ngIf="profile.slug && profile.is_published; else blurredQr">
               <div class="bg-white p-2 rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                    [ngClass]="profile.theme_id === 'glass_morphism' ? 'border-4 border-white/20' : 'border-4 border-white'">
@@ -77,6 +78,86 @@ import { QRCodeComponent } from 'angularx-qrcode';
                 <div class="absolute inset-0 flex items-center justify-center p-2"><p class="text-[10px] font-bold text-center leading-tight text-gray-600 bg-white/90 px-2 py-1 rounded shadow-sm">Publish profile<br>to get a QR</p></div>
               </div>
             </ng-template>
+            </div>
+
+            <!-- Vertical Actions Tile -->
+            <div *ngIf="profile.slug && profile.is_published" class="flex flex-col gap-2 animate-in fade-in slide-in-from-left-4 duration-700 delay-100">
+                <!-- Like -->
+                <div class="flex items-center gap-1">
+                <button (click)="handleLike()" 
+                        class="w-8 h-8 flex items-center justify-center rounded-full shadow-sm transition-all hover:scale-110 active:scale-95"
+                        [ngClass]="{
+                            'bg-white text-gray-600 hover:text-red-500': profile.theme_id === 'minimal_light',
+                            'bg-slate-700 text-slate-300 hover:text-red-400': profile.theme_id === 'dark_modern',
+                            'bg-white/20 text-white hover:bg-white/30': profile.theme_id === 'glass_morphism',
+                            'text-red-500': hasLiked
+                        }"
+                        title="Like Profile">
+                    <svg class="w-4 h-4 transition-transform" [class.fill-current]="hasLiked" [class.stroke-current]="!hasLiked" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                </button>
+                <span class="text-[10px] font-bold" 
+                      [ngClass]="{
+                        'text-gray-500': profile.theme_id === 'minimal_light',
+                        'text-slate-400': profile.theme_id === 'dark_modern',
+                        'text-white/80': profile.theme_id === 'glass_morphism'
+                      }">{{ likeCount }}</span>
+                </div>
+
+                <!-- Share -->
+                <div class="relative">
+                    <button (click)="showShareMenu = !showShareMenu; $event.stopPropagation()"
+                            class="w-8 h-8 flex items-center justify-center rounded-full shadow-sm transition-all hover:scale-110 active:scale-95"
+                            [ngClass]="{
+                                'bg-white text-gray-600 hover:text-blue-500': profile.theme_id === 'minimal_light',
+                                'bg-slate-700 text-slate-300 hover:text-blue-400': profile.theme_id === 'dark_modern',
+                                'bg-white/20 text-white hover:bg-white/30': profile.theme_id === 'glass_morphism'
+                            }"
+                            title="Share Profile">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    </button>
+                    
+                    <!-- Share Dropdown -->
+                    <div *ngIf="showShareMenu" 
+                         class="absolute top-0 left-full ml-2 bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 w-40 border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-200 text-gray-800">
+                        <button (click)="shareToWhatsapp()" class="flex items-center gap-2 px-2 py-1.5 hover:bg-green-50 rounded-lg text-left text-[10px] font-bold transition-colors">
+                            <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.161 4.241 4.175-1.141zm11.397-7.909c.024-.079.057-.158.088-.238-.182-.569-1.004-1.103-1.731-1.321-.719-.216-1.534-.34-2.094-.13-.553.211-1.092.537-1.502.944-.362.363-.72.726-1.103 1.045-.219.183-.433.363-.658.534-.104-.157-.206-.317-.308-.475-.318-.525-.687-1.029-1.086-1.524-.263-.32-.514-.651-.795-.944-.186-.191-.357-.394-.547-.575.039-.124.098-.238.157-.353.136-.242.279-.486.432-.718.063-.097.117-.196.168-.301.334-.695.261-1.268-.131-1.958-.323-.567-.71-1.103-1.123-1.608-.246-.299-.495-.593-.766-.869-.313-.309-.689-.395-1.133-.246-.591.202-1.035.603-1.298 1.183-.104.23-.17.483-.177.754-.005.188.033.373.082.55.16.586.445 1.126.757 1.632.416.666.876 1.295 1.401 1.883.401.449.817.885 1.265 1.287.527.471 1.108.884 1.736 1.231.719.389 1.459.73 2.238.998.444.149.898.263 1.353.328.499.071.993.044 1.477-.086.488-.133.883-.389 1.22-.746.197-.213.382-.439.533-.685.187-.318.267-.672.252-1.042z"/></svg></div>
+                            WhatsApp
+                        </button>
+                        <button (click)="shareToEmail()" class="flex items-center gap-2 px-2 py-1.5 hover:bg-blue-50 rounded-lg text-left text-[10px] font-bold transition-colors">
+                            <div class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                            Email
+                        </button>
+                        <button (click)="copyLink()" class="flex items-center gap-2 px-2 py-1.5 hover:bg-gray-100 rounded-lg text-left text-[10px] font-bold transition-colors">
+                            <div class="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-gray-600"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Copy QR -->
+                <button (click)="copyQr()" 
+                        class="w-8 h-8 flex items-center justify-center rounded-full shadow-sm transition-all hover:scale-110 active:scale-95"
+                        [ngClass]="{
+                            'bg-white text-gray-600 hover:text-black': profile.theme_id === 'minimal_light',
+                            'bg-slate-700 text-slate-300 hover:text-white': profile.theme_id === 'dark_modern',
+                            'bg-white/20 text-white hover:bg-white/30': profile.theme_id === 'glass_morphism'
+                        }"
+                        title="Copy QR Code">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                </button>
+
+                <!-- Download QR -->
+                <button (click)="downloadQr()" 
+                        class="w-8 h-8 flex items-center justify-center rounded-full shadow-sm transition-all hover:scale-110 active:scale-95"
+                        [ngClass]="{
+                            'bg-white text-gray-600 hover:text-black': profile.theme_id === 'minimal_light',
+                            'bg-slate-700 text-slate-300 hover:text-white': profile.theme_id === 'dark_modern',
+                            'bg-white/20 text-white hover:bg-white/30': profile.theme_id === 'glass_morphism'
+                        }"
+                        title="Download QR Code">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                </button>
+            </div>
           </div>
 
           <h1 class="text-2xl font-bold tracking-tight mb-2" [ngClass]="{'md:text-3xl': previewMode === 'desktop'}">{{ profile.full_name || 'Your Name' }}</h1>
@@ -147,58 +228,6 @@ import { QRCodeComponent } from 'angularx-qrcode';
                  </ng-container>
               </a>
             </ng-container>
-          </div>
-
-          <div class="mt-8 border-t pt-6 flex items-center justify-between"
-               [ngClass]="{
-                  'border-gray-200': profile.theme_id === 'minimal_light',
-                  'border-white/10': profile.theme_id !== 'minimal_light'
-               }">
-            
-             <button (click)="handleLike()" 
-                     class="flex items-center gap-2 text-sm font-bold transition-colors group focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg p-1"
-                     [ngClass]="{
-                        'focus:ring-black': profile.theme_id === 'minimal_light',
-                        'focus:ring-white focus:ring-offset-slate-900': profile.theme_id === 'dark_modern',
-                        'focus:ring-white/50 focus:ring-offset-purple-600': profile.theme_id === 'glass_morphism',
-                        'text-red-500': hasLiked,
-                        'opacity-60 hover:opacity-100': !hasLiked
-                     }">
-                 <svg class="w-5 h-5 transition-transform group-active:scale-125" 
-                      [class.fill-current]="hasLiked" 
-                      [class.stroke-current]="!hasLiked"
-                      fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                 <span>{{ likeCount }}</span>
-             </button>
-
-             <div class="relative">
-               <button (click)="showShareMenu = !showShareMenu; $event.stopPropagation()" 
-                       class="flex items-center gap-2 text-sm font-bold opacity-60 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg p-1"
-                       [ngClass]="{
-                          'focus:ring-black': profile.theme_id === 'minimal_light',
-                          'focus:ring-white focus:ring-offset-slate-900': profile.theme_id === 'dark_modern',
-                          'focus:ring-white/50 focus:ring-offset-purple-600': profile.theme_id === 'glass_morphism'
-                       }">
-                   <span>Share</span>
-                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-               </button>
-
-               <div *ngIf="showShareMenu" 
-                    class="absolute bottom-full right-0 mb-3 bg-white rounded-xl shadow-2xl p-2 flex flex-col gap-1 w-48 border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-200 text-gray-800">
-                    <button (click)="shareToWhatsapp()" class="flex items-center gap-3 px-3 py-2 hover:bg-green-50 rounded-lg text-left text-xs font-bold transition-colors">
-                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.161 4.241 4.175-1.141zm11.397-7.909c.024-.079.057-.158.088-.238-.182-.569-1.004-1.103-1.731-1.321-.719-.216-1.534-.34-2.094-.13-.553.211-1.092.537-1.502.944-.362.363-.72.726-1.103 1.045-.219.183-.433.363-.658.534-.104-.157-.206-.317-.308-.475-.318-.525-.687-1.029-1.086-1.524-.263-.32-.514-.651-.795-.944-.186-.191-.357-.394-.547-.575.039-.124.098-.238.157-.353.136-.242.279-.486.432-.718.063-.097.117-.196.168-.301.334-.695.261-1.268-.131-1.958-.323-.567-.71-1.103-1.123-1.608-.246-.299-.495-.593-.766-.869-.313-.309-.689-.395-1.133-.246-.591.202-1.035.603-1.298 1.183-.104.23-.17.483-.177.754-.005.188.033.373.082.55.16.586.445 1.126.757 1.632.416.666.876 1.295 1.401 1.883.401.449.817.885 1.265 1.287.527.471 1.108.884 1.736 1.231.719.389 1.459.73 2.238.998.444.149.898.263 1.353.328.499.071.993.044 1.477-.086.488-.133.883-.389 1.22-.746.197-.213.382-.439.533-.685.187-.318.267-.672.252-1.042z"/></svg></div>
-                        Share on WhatsApp
-                    </button>
-                    <button (click)="shareToEmail()" class="flex items-center gap-3 px-3 py-2 hover:bg-blue-50 rounded-lg text-left text-xs font-bold transition-colors">
-                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-                        Send via Email
-                    </button>
-                    <button (click)="copyLink()" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 rounded-lg text-left text-xs font-bold transition-colors">
-                        <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-gray-600"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
-                        Copy Link
-                    </button>
-               </div>
-             </div>
           </div>
         </div>
 
@@ -280,6 +309,32 @@ export class CardPreviewComponent implements OnInit {
      const url = window.location.href;
      navigator.clipboard.writeText(url).then(() => alert("Link copied to clipboard!"));
      this.trackShare('copy_link');
+  }
+
+  downloadQr() {
+    const canvas = document.querySelector('qrcode canvas') as HTMLCanvasElement;
+    if (canvas) {
+      const url = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `qr-${this.profile.slug}.png`;
+      link.href = url;
+      link.click();
+    }
+  }
+
+  copyQr() {
+    const canvas = document.querySelector('qrcode canvas') as HTMLCanvasElement;
+    if (canvas) {
+      canvas.toBlob(blob => {
+        if (blob) {
+            // @ts-ignore
+            const item = new ClipboardItem({ 'image/png': blob });
+            // @ts-ignore
+            navigator.clipboard.write([item]).then(() => alert('QR Code copied to clipboard!'))
+            .catch(err => console.error('Could not copy QR code', err));
+        }
+      });
+    }
   }
 
   private trackShare(platform: string) {
