@@ -239,8 +239,10 @@ import { QRCodeComponent } from 'angularx-qrcode';
        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
     </svg>
 
-    <svg *ngSwitchCase="'instagram'" [attr.fill]="getIconColor('instagram')" [ngClass]="previewMode==='mobile'?'w-5 h-5':'w-6 h-6'" viewBox="0 0 24 24">
-       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.252-.149-4.771-1.692-4.919-4.919-.058-1.265-.071-1.644-.071-4.849 0-3.204.013-3.583.071-4.849.149-3.227 1.664-4.771 4.919-4.919zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    <svg *ngSwitchCase="'instagram'" fill="none" [attr.stroke]="getIconColor('instagram')" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" [ngClass]="previewMode==='mobile'?'w-5 h-5':'w-6 h-6'" viewBox="0 0 24 24">
+       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
     </svg>
 
     <svg *ngSwitchCase="'tiktok'" [attr.fill]="getIconColor('tiktok')" [ngClass]="previewMode==='mobile'?'w-5 h-5':'w-6 h-6'" viewBox="0 0 24 24">
@@ -254,6 +256,17 @@ import { QRCodeComponent } from 'angularx-qrcode';
 </ng-container>
               </a>
             </ng-container>
+          </div>
+
+          <div class="mt-8 flex justify-center">
+             <a href="/" target="_blank" class="flex items-center gap-1.5 opacity-50 hover:opacity-100 transition-opacity group">
+                <div class="w-3 h-3 rounded-sm flex items-center justify-center text-[6px] font-bold"
+                     [ngClass]="{
+                        'bg-black text-white': profile.theme_id === 'minimal_light',
+                        'bg-white text-black': profile.theme_id !== 'minimal_light'
+                     }">C</div>
+                <span class="text-[10px] font-medium tracking-wide">Powered by <strong>Card.io</strong></span>
+             </a>
           </div>
         </div>
 
