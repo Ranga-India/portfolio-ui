@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-landing',
@@ -14,11 +16,17 @@ import { RouterLink } from '@angular/router';
           <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white font-bold text-lg">C</div>
           <span class="font-bold text-xl tracking-tight">Card.io</span>
         </div>
-        <div class="flex gap-4">
-          <a routerLink="/login" class="text-sm font-medium text-gray-600 hover:text-black transition py-2">Sign In</a>
-          <a routerLink="/login" class="text-sm font-bold bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition shadow-lg shadow-gray-200">
-            Get Started
-          </a>
+        <div class="flex gap-4 items-center">
+          <ng-container *ngIf="!user()">
+            <a routerLink="/login" class="text-sm font-medium text-gray-600 hover:text-black transition py-2">Sign In</a>
+            <a routerLink="/login" class="text-sm font-bold bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition shadow-lg shadow-gray-200">
+              Get Started
+            </a>
+          </ng-container>
+          <ng-container *ngIf="user()">
+            <a routerLink="/editor" class="text-sm font-medium text-gray-600 hover:text-black transition py-2">Edit Profile</a>
+            <button (click)="logout()" class="text-sm font-bold bg-gray-100 text-gray-900 px-5 py-2 rounded-full hover:bg-gray-200 transition">Log Out</button>
+          </ng-container>
         </div>
       </nav>
 
@@ -42,7 +50,7 @@ import { RouterLink } from '@angular/router';
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                 <span class="text-gray-400 font-bold">card.io/</span>
               </div>
-              <input type="text" placeholder="your-name" class="block w-full rounded-full border-0 py-3 pl-20 pr-4 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+              <input type="text" placeholder="your-name" disabled class="block w-full rounded-full border-0 py-3 pl-20 pr-4 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
             </div>
             <button routerLink="/login" class="bg-black text-white font-bold py-3 px-8 rounded-full hover:bg-gray-800 transition shadow-xl">
               Claim Link
@@ -100,4 +108,14 @@ import { RouterLink } from '@angular/router';
     }
   `]
 })
-export class LandingComponent {}
+export class LandingComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  user = toSignal(this.authService.currentUser$);
+
+  logout() {
+    this.authService.signOut().then(() => {
+      this.router.navigateByUrl('/login');
+    });
+  }
+}

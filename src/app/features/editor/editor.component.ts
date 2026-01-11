@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { ProfileService, Profile, SocialLink } from '../../core/services/profile.service';
 import { CardPreviewComponent } from '../card-preview/card-preview.component';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule, CardPreviewComponent],
+  imports: [CommonModule, FormsModule, CardPreviewComponent, RouterLink],
   templateUrl: './editor.component.html'
 })
 export class EditorComponent implements OnInit {
