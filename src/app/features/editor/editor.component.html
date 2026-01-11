@@ -62,11 +62,30 @@
                 <input [(ngModel)]="profile.location" (ngModelChange)="triggerSave()" type="text" 
                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition" placeholder="e.g. Indira Nagar, Bengaluru">
               </div>
-            <div>
-              <label class="block text-xs font-semibold text-gray-700 mb-1">Bio</label>
-              <textarea [(ngModel)]="profile.bio" (ngModelChange)="triggerSave()" rows="3" 
-                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none transition resize-none" placeholder="Tell your story..."></textarea>
-            </div>
+              <div class="mb-6">
+                <div class="flex items-baseline gap-2 mb-2">
+                  <label class="block text-xs font-semibold text-gray-700">Bio</label>
+                  
+                  <span class="text-[10px] text-gray-400 font-normal">
+                    Keep it short. Keep it relevant. 50-100 words suggested.
+                  </span>
+                </div>
+              
+                <textarea 
+                  [(ngModel)]="profile.bio" 
+                  (ngModelChange)="triggerSave()"
+                  rows="4" 
+                  maxlength="600"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
+                  placeholder="Tell the world who you are..."></textarea>
+              
+                <div class="flex justify-end mt-1 min-h-[16px]">
+                  <span *ngIf="(profile.bio?.length || 0) >= 600" 
+                        class="text-[10px] text-red-500 font-bold animate-pulse">
+                    Max limit reached
+                  </span>
+                </div>
+              </div>
             <div class="mb-6">
                 <label class="block text-xs font-semibold text-gray-700 mb-2">Hashtags</label>
               
@@ -109,28 +128,35 @@
                 
                 <p class="text-[10px] text-gray-300 mt-1 text-right">{{ profile.hashtags?.length || 0 }}/5 tags</p>
               </div>
-            <div class="mb-6">
-                <label class="block text-xs font-semibold text-gray-700 mb-1">Public Url</label>
+              <div class="mb-6">
+                <label class="block text-xs font-semibold text-gray-700 mb-2">Your Public URL</label>
                 
-                <div class="flex rounded-lg bg-gray-50 border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-black focus-within:border-transparent transition-all">
-                   <span class="px-3 py-2 text-gray-400 text-sm border-r border-gray-200 bg-gray-100 select-none">card.io/</span>
-                   <input [(ngModel)]="profile.slug" (ngModelChange)="triggerSave()" type="text" 
-                          class="flex-1 bg-transparent px-3 py-2 text-sm focus:outline-none placeholder-gray-300 text-gray-800 font-medium" 
-                          placeholder="username">
+                <div class="flex items-center group" 
+                     [ngClass]="profile.slug ? 'opacity-50 cursor-not-allowed' : ''">
+                  
+                  <span class="bg-gray-100 border border-r-0 border-gray-300 text-gray-500 text-sm px-3 py-2 rounded-l-lg">
+                    card.io/p/
+                  </span>
+              
+                  <input type="text" 
+                         [(ngModel)]="profile.slug" 
+                         (ngModelChange)="triggerSave()"
+                         [disabled]="!!profile.slug" 
+                         placeholder="john-doe"
+                         class="flex-1 border border-gray-300 rounded-r-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black disabled:bg-gray-50 disabled:text-gray-500">
                 </div>
-            
-                <div *ngIf="suggestedSlugs.length > 0" class="mt-3 animate-fade-in">
-                    <p class="text-[10px] uppercase font-bold text-gray-400 mb-2">Available Suggestions:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button *ngFor="let slug of suggestedSlugs" 
-                                (click)="applySlug(slug)"
-                                class="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full border border-blue-100 hover:bg-blue-100 hover:border-blue-200 transition-colors font-medium cursor-pointer flex items-center gap-1">
-                            {{ slug }}
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        </button>
-                    </div>
+              
+                <div class="mt-2 min-h-[20px]">
+                  <p *ngIf="profile.slug" class="text-xs text-gray-500 flex items-center gap-1">
+                    <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    Your URL is permanent.
+                  </p>
+              
+                  <p *ngIf="!profile.slug" class="text-[10px] text-gray-400">
+                    Choose wisely! This URL will be yours forever.
+                  </p>
                 </div>
-            </div>
+              </div>
           </div>
         </section>
   

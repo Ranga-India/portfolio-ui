@@ -64,4 +64,8 @@ getPublicPortfolio(slug: string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/portfolios/public/${slug}`);
 }
 
+trackView(slug: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/public/${slug}/view`, {});
+}
+
 }

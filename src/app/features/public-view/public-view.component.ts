@@ -48,6 +48,15 @@ export class PublicViewComponent implements OnInit {
 
     if (slug) {
       this.loadProfile(slug);
+      // --- TRIGGER VIEW TRACKING ---
+      // We use a simple sessionStorage check to prevent counting 
+      // the same user reloading the page 10 times in one session.
+      const viewKey = `viewed_${slug}`;
+      if (!sessionStorage.getItem(viewKey)) {
+        this.profileService.trackView(slug).subscribe(() => {
+           sessionStorage.setItem(viewKey, 'true');
+        });
+      }
     } else {
       this.hasError = true;
       this.isLoading = false;

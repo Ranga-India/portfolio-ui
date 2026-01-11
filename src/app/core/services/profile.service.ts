@@ -93,4 +93,8 @@ trackShare(slug: string, platform: string): Observable<any> {
   return this.http.post(`${this.apiUrl}/public/${slug}/share`, { platform });
 }
 
+trackView(slug: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/public/${slug}/view`, {});
+}
+
 }

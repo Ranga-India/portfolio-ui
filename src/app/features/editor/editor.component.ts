@@ -81,6 +81,22 @@ export class EditorComponent implements OnInit {
     this.triggerSave();
   }
 
+  onBioChange(text: string) {
+    if (!text) {
+      this.profile.bio = '';
+      this.triggerSave();
+      return;
+    }
+    
+    const words = text.trim().split(/\s+/);
+    if (words.length > 100) {
+      this.profile.bio = words.slice(0, 100).join(' ');
+    } else {
+      this.profile.bio = text;
+    }
+    this.triggerSave();
+  }
+
   loadProfile() {
     this.profileService.getMyProfile().subscribe({
       next: (data) => {
