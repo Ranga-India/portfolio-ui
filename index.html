@@ -13,7 +13,7 @@
             padding: 40px 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             background: #fff;
             padding: 30px 40px;
@@ -58,12 +58,16 @@
             cursor: pointer;
         }
         .dynamic-section {
-            display: none; /* Hidden by default */
+            display: none;
             padding: 20px;
             background-color: #f8f9fa;
             border-left: 4px solid #3498db;
             border-radius: 4px;
             margin-bottom: 20px;
+        }
+        .other-input {
+            display: none;
+            margin-top: 10px;
         }
         .submit-btn {
             width: 100%;
@@ -95,112 +99,86 @@
     <form id="signupForm">
         <div class="form-group">
             <label>First Name <span class="required-asterisk">*</span></label>
-            <input type="text" placeholder="Enter first name">
+            <input type="text" placeholder="Enter first name" required>
         </div>
         <div class="form-group">
             <label>Last Name <span class="required-asterisk">*</span></label>
-            <input type="text" placeholder="Enter last name">
+            <input type="text" placeholder="Enter last name" required>
         </div>
         <div class="form-group">
             <label>Email <span class="required-asterisk">*</span></label>
-            <input type="email" placeholder="Enter email address">
+            <input type="email" placeholder="Enter email address" required>
         </div>
         <div class="form-group">
             <label>Phone Number</label>
             <input type="text" placeholder="Enter phone number">
         </div>
-        <div class="form-group">
-            <label>Website URL</label>
-            <input type="text" placeholder="https://">
-        </div>
 
         <hr>
 
         <div class="form-group">
-            <label>Are you a Lawyer? <span class="required-asterisk">*</span></label>
+            <label>User Type <span class="required-asterisk">*</span></label>
             <div class="radio-group">
                 <label>
-                    <input type="radio" name="userType" value="lawyer" onclick="toggleSections()"> Yes, I am a Lawyer
+                    <input type="radio" name="userType" value="lawyer" onclick="toggleSections()"> Lawyer
                 </label>
                 <label>
-                    <input type="radio" name="userType" value="nonLawyer" onclick="toggleSections()"> No, I am a Non-Lawyer Professional
+                    <input type="radio" name="userType" value="nonLawyer" onclick="toggleSections()"> Non-Lawyer Professional
                 </label>
             </div>
         </div>
 
         <div id="lawyerSection" class="dynamic-section">
             <div class="form-group">
-                <label>State of Admission</label>
-                <input type="text" placeholder="e.g. New York">
-            </div>
-            <div class="form-group">
-                <label>Year of Admission</label>
-                <input type="text" placeholder="YYYY">
+                <label>Professional Affiliation / Area of Expertise</label>
+                <select id="lawyerAffiliation" onchange="checkOther('lawyerAffiliation', 'lawyerOther')">
+                    <option value="">-- Select Specialty --</option>
+                    <option value="appellate">Appellate (Appeals, briefing, higher courts)</option>
+                    <option value="bankruptcy">Bankruptcy & Restructuring</option>
+                    <option value="business">Business & Corporate (Transactions, M&A, contracts)</option>
+                    <option value="civil">Civil Litigation (General, commercial, personal injury)</option>
+                    <option value="criminal">Criminal Law (Defense and prosecution)</option>
+                    <option value="employment">Employment & Labor</option>
+                    <option value="family">Family Law (Divorce, custody, support)</option>
+                    <option value="government">Government & Regulatory</option>
+                    <option value="immigration">Immigration</option>
+                    <option value="ip">Intellectual Property</option>
+                    <option value="realestate">Real Estate</option>
+                    <option value="trusts">Trusts & Estates</option>
+                    <option value="other">Other...</option>
+                </select>
+                <div id="lawyerOther" class="other-input">
+                    <input type="text" placeholder="Please specify your specialty">
+                </div>
             </div>
             <div class="form-group">
                 <label>Bar ID <span class="required-asterisk">*</span></label>
                 <input type="text" placeholder="Enter your Bar ID">
             </div>
-            
             <div class="form-group">
-                <label>Professional Affiliation</label>
-                <select id="affiliationDropdown" onchange="toggleAffiliation()">
-                    <option value="">-- Select --</option>
-                    <option value="practicing">Practicing Attorney</option>
-                    <option value="professor">Law Professor</option>
-                </select>
-            </div>
-
-            <div id="practicingSection" style="display: none; margin-top: 15px;">
-                <div class="form-group">
-                    <label>Firm Name</label>
-                    <input type="text" placeholder="Enter firm name">
-                </div>
-                <div class="form-group">
-                    <label>Firm Size</label>
-                    <select>
-                        <option value="">-- Select Size --</option>
-                        <option value="1">Solo (1)</option>
-                        <option value="2-10">Small (2-10)</option>
-                        <option value="11-50">Medium (11-50)</option>
-                        <option value="51-200">Large (51-200)</option>
-                        <option value="200+">Enterprise (200+)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Area of Expertise</label>
-                    <select>
-                        <option value="">-- Select Area --</option>
-                        <option value="civil">Civil Litigation</option>
-                        <option value="criminal">Criminal Defense</option>
-                        <option value="corporate">Corporate Law</option>
-                        <option value="family">Family Law</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="professorSection" style="display: none; margin-top: 15px;">
-                <div class="form-group">
-                    <label>University Affiliation</label>
-                    <input type="text" placeholder="Enter university name">
-                </div>
+                <label>State of Admission</label>
+                <input type="text" placeholder="e.g. New York">
             </div>
         </div>
 
         <div id="nonLawyerSection" class="dynamic-section">
             <div class="form-group">
-                <label>Occupation</label>
-                <select>
-                    <option value="">-- Select Occupation --</option>
-                    <option value="student">Student</option>
-                    <option value="academic">Academic</option>
-                    <option value="paralegal">Paralegal</option>
-                    <option value="assistant">Legal Assistant</option>
-                    <option value="other">Other</option>
+                <label>General Designation</label>
+                <select id="nonLawyerAffiliation" onchange="checkOther('nonLawyerAffiliation', 'nonLawyerOther')">
+                    <option value="">-- Select Designation --</option>
+                    <option value="public">Public / Users of the System (litigants, jurors, students)</option>
+                    <option value="support">Legal Support Roles (paralegals, court staff)</option>
+                    <option value="enforcement">Government & Enforcement (law enforcement, regulators)</option>
+                    <option value="business">Business & Industry (HR, execs, real estate, insurance, tech)</option>
+                    <option value="experts">Experts & Analysts (forensics, academics, journalists)</option>
+                    <option value="other">Other...</option>
                 </select>
+                <div id="nonLawyerOther" class="other-input">
+                    <input type="text" placeholder="Please specify your role">
+                </div>
             </div>
             <div class="form-group">
-                <label>Place of Business</label>
+                <label>Place of Business / Organization</label>
                 <input type="text" placeholder="Enter place of business">
             </div>
         </div>
@@ -222,7 +200,7 @@
             </label>
         </div>
 
-        <button type="button" class="submit-btn" onclick="alert('Form submitted! (Prototype)')">Submit Registration</button>
+        <button type="button" class="submit-btn" onclick="alert('Registration complete! Data captured for ' + document.querySelector('input[name=\'userType\']:checked').value)">Submit Registration</button>
     </form>
 </div>
 
@@ -235,26 +213,20 @@
         if (userType === 'lawyer') {
             lawyerSection.style.display = 'block';
             nonLawyerSection.style.display = 'none';
-        } else if (userType === 'nonLawyer') {
+        } else {
             lawyerSection.style.display = 'none';
             nonLawyerSection.style.display = 'block';
         }
     }
 
-    function toggleAffiliation() {
-        const affiliation = document.getElementById('affiliationDropdown').value;
-        const practicingSection = document.getElementById('practicingSection');
-        const professorSection = document.getElementById('professorSection');
-
-        if (affiliation === 'practicing') {
-            practicingSection.style.display = 'block';
-            professorSection.style.display = 'none';
-        } else if (affiliation === 'professor') {
-            practicingSection.style.display = 'none';
-            professorSection.style.display = 'block';
+    function checkOther(dropdownId, otherId) {
+        const dropdown = document.getElementById(dropdownId);
+        const otherDiv = document.getElementById(otherId);
+        
+        if (dropdown.value === 'other') {
+            otherDiv.style.display = 'block';
         } else {
-            practicingSection.style.display = 'none';
-            professorSection.style.display = 'none';
+            otherDiv.style.display = 'none';
         }
     }
 </script>
