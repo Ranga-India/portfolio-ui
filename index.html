@@ -3,238 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Robing Room - Signup Prototype</title>
+    
+    <meta property="og:title" content="How AI is Changing Web Development">
+    <meta property="og:description" content="Discover the latest trends in artificial intelligence and how it is shaping the future of frontend development.">
+    <meta property="og:url" content="https://yourusername.github.io/your-repo/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:type" content="article">
+
+    <title>Blog Post - AI Prototype</title>
+
     <style>
+        /* Basic Page Styling */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
             line-height: 1.6;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 650px;
+            color: #333;
+            max-width: 800px;
             margin: 0 auto;
-            background: #fff;
-            padding: 30px 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .blog-container {
+            background: white;
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #444;
-        }
-        input[type="text"], input[type="email"], input[type="password"], select {
+
+        .blog-image {
             width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #eee;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-linkedin {
+            background-color: #0a66c2;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .btn-linkedin:hover {
+            background-color: #004182;
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ccc;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+
+        /* Modal Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-        .required-asterisk {
-            color: #e74c3c;
-        }
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-        .radio-group label {
-            font-weight: normal;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-        .dynamic-section {
-            display: none;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .other-input {
-            display: none;
+            font-family: inherit;
+            resize: vertical;
             margin-top: 10px;
+            box-sizing: border-box;
         }
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .submit-btn:hover {
-            background-color: #1a252f;
-        }
-        hr {
-            border: 0;
-            border-top: 1px solid #eee;
-            margin: 30px 0;
+
+        .loading {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            padding: 20px 0;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Create Your Account</h2>
-    
-    <form id="signupForm">
-        <div class="form-group">
-            <label>First Name <span class="required-asterisk">*</span></label>
-            <input type="text" placeholder="Enter first name" required>
-        </div>
-        <div class="form-group">
-            <label>Last Name <span class="required-asterisk">*</span></label>
-            <input type="text" placeholder="Enter last name" required>
-        </div>
-        <div class="form-group">
-            <label>Email <span class="required-asterisk">*</span></label>
-            <input type="email" placeholder="Enter email address" required>
-        </div>
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" placeholder="Enter phone number">
-        </div>
+    <main class="blog-container">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop" alt="AI Concept" class="blog-image">
+        <h1>How AI is Changing Web Development</h1>
+        <p>By Jane Doe | April 3, 2026</p>
+        <p>Artificial Intelligence is rapidly evolving, bringing new tools to web developers that automate mundane tasks, generate code snippets, and even write marketing copy on the fly. In this post, we explore how integrating AI into your workflow can save you hours of manual labor.</p>
+        <p>Whether you are building complex backend systems or simple frontend interfaces, AI assistants are becoming an indispensable part of the modern developer toolkit.</p>
+        
+        <button id="triggerShare" class="btn btn-linkedin">
+            Share on LinkedIn
+        </button>
+    </main>
 
-        <hr>
-
-        <div class="form-group">
-            <label>Are you a Lawyer? <span class="required-asterisk">*</span></label>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="userType" value="lawyer" onclick="toggleSections()"> Yes
-                </label>
-                <label>
-                    <input type="radio" name="userType" value="nonLawyer" onclick="toggleSections()"> No
-                </label>
-            </div>
-        </div>
-
-        <div id="lawyerSection" class="dynamic-section">
-            <div class="form-group">
-                <label>Professional Affiliation / Specialty</label>
-                <select id="lawyerAffiliation" onchange="checkOther('lawyerAffiliation', 'lawyerOther')">
-                    <option value="">-- Select Specialty --</option>
-                    <option value="appellate">Appellate</option>
-                    <option value="bankruptcy">Bankruptcy & Restructuring</option>
-                    <option value="business">Business & Corporate (Transactions, M&A, contracts)</option>
-                    <option value="civil">Civil Litigation (General, commercial, personal injury)</option>
-                    <option value="criminal">Criminal Law (Defense and prosecution)</option>
-                    <option value="employment">Employment & Labor</option>
-                    <option value="family">Family Law (Divorce, custody, support)</option>
-                    <option value="government">Government & Regulatory</option>
-                    <option value="immigration">Immigration</option>
-                    <option value="ip">Intellectual Property</option>
-                    <option value="professor">Law Professor</option>
-                    <option value="realestate">Real Estate</option>
-                    <option value="trusts">Trusts & Estates</option>
-                    <option value="other">Other...</option>
-                </select>
-                <div id="lawyerOther" class="other-input">
-                    <input type="text" placeholder="Please specify your specialty">
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            
+            <div id="step-prompt" class="step active">
+                <div class="modal-header">✨ Generate AI Caption?</div>
+                <p>Would you like our AI to generate an engaging LinkedIn caption for this article?</p>
+                <div class="button-group">
+                    <button id="btnNo" class="btn btn-secondary">No, just share</button>
+                    <button id="btnYes" class="btn btn-primary">Yes, generate it</button>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Place of Employment <span class="required-asterisk">*</span></label>
-                <input type="text" placeholder="Firm, Agency, or University name">
-            </div>
-            <div class="form-group">
-                <label>Bar ID <span class="required-asterisk">*</span></label>
-                <input type="text" placeholder="Enter your Bar ID">
-            </div>
-            <div class="form-group">
-                <label>State of Admission <span class="required-asterisk">*</span></label>
-                <input type="text" placeholder="e.g. New York">
-            </div>
-        </div>
 
-        <div id="nonLawyerSection" class="dynamic-section">
-            <div class="form-group">
-                <label>Occupation <span class="required-asterisk">*</span></label>
-                <select id="nonLawyerAffiliation" onchange="checkOther('nonLawyerAffiliation', 'nonLawyerOther')">
-                    <option value="">-- Select Occupation --</option>
-                    <option value="student">Law Student</option>
-                    <option value="support">Legal Support Roles (paralegals, court staff)</option>
-                    <option value="enforcement">Government & Enforcement (law enforcement, regulators)</option>
-                    <option value="business">Business & Industry (HR, execs, real estate, insurance, tech)</option>
-                    <option value="experts">Experts & Analysts (forensics, academics, journalists)</option>
-                    <option value="other">Other...</option>
-                </select>
-                <div id="nonLawyerOther" class="other-input">
-                    <input type="text" placeholder="Please specify your role">
+            <div id="step-loading" class="step">
+                <div class="loading">Generating the perfect caption...</div>
+            </div>
+
+            <div id="step-result" class="step">
+                <div class="modal-header">Your AI Caption</div>
+                <p style="font-size: 14px; color: #666;">Edit your caption below, copy it, and then proceed to LinkedIn to paste it along with the article link.</p>
+                
+                <textarea id="aiCaptionText"></textarea>
+                
+                <div class="button-group" style="justify-content: space-between;">
+                    <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="btnCopy" class="btn btn-secondary">Copy Caption</button>
+                        <button id="btnPost" class="btn btn-linkedin">Go to LinkedIn</button>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Place of Business / Organization <span class="required-asterisk">*</span></label>
-                <input type="text" placeholder="Enter place of business">
-            </div>
-        </div>
 
-        <hr>
+        </div>
+    </div>
 
-        <div class="form-group">
-            <label>Create Password <span class="required-asterisk">*</span></label>
-            <input type="password" placeholder="Min 8 characters">
-        </div>
-        <div class="form-group">
-            <label>Confirm Password <span class="required-asterisk">*</span></label>
-            <input type="password" placeholder="Retype password">
-        </div>
+    <script>
+        // DOM Elements
+        const triggerShare = document.getElementById('triggerShare');
+        const modal = document.getElementById('modal');
+        const stepPrompt = document.getElementById('step-prompt');
+        const stepLoading = document.getElementById('step-loading');
+        const stepResult = document.getElementById('step-result');
+        const aiCaptionText = document.getElementById('aiCaptionText');
         
-        <div class="form-group">
-            <label style="font-weight: normal; display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox"> I agree to the terms of use
-            </label>
-        </div>
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        const btnCancel = document.getElementById('btnCancel');
+        const btnCopy = document.getElementById('btnCopy');
+        const btnPost = document.getElementById('btnPost');
 
-        <button type="button" class="submit-btn" onclick="alert('Registration submitted. Restricted access pending verification.')">Submit Registration</button>
-    </form>
-</div>
+        // Fake AI Generated Text for the prototype
+        const mockGeneratedCaption = "Just read an incredible article on how AI is fundamentally changing web development! 🚀 From automating boilerplate to generating copy, the workflow of tomorrow is already here. What are your thoughts on AI in your daily dev stack? Let me know below! 👇\n\n#WebDevelopment #ArtificialIntelligence #TechTrends";
 
-<script>
-    function toggleSections() {
-        const userType = document.querySelector('input[name="userType"]:checked').value;
-        const lawyerSection = document.getElementById('lawyerSection');
-        const nonLawyerSection = document.getElementById('nonLawyerSection');
-
-        if (userType === 'lawyer') {
-            lawyerSection.style.display = 'block';
-            nonLawyerSection.style.display = 'none';
-        } else {
-            lawyerSection.style.display = 'none';
-            nonLawyerSection.style.display = 'block';
+        // Helper: Switch active steps
+        function showStep(stepElement) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            stepElement.classList.add('active');
         }
-    }
 
-    function checkOther(dropdownId, otherId) {
-        const dropdown = document.getElementById(dropdownId);
-        const otherDiv = document.getElementById(otherId);
-        
-        if (dropdown.value === 'other') {
-            otherDiv.style.display = 'block';
-        } else {
-            otherDiv.style.display = 'none';
+        // Helper: Close Modal
+        function closeModal() {
+            modal.classList.remove('active');
+            setTimeout(() => { showStep(stepPrompt); }, 300); // Reset after fade out
         }
-    }
-</script>
 
+        // Helper: Open LinkedIn Share URL
+        function openLinkedInShare() {
+            // In a real environment, use window.location.href. 
+            // For testing locally without a real domain, LinkedIn might throw an error.
+            const currentUrl = encodeURIComponent(window.location.href);
+            const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+            window.open(linkedInShareUrl, '_blank');
+            closeModal();
+        }
+
+        // --- Event Listeners ---
+
+        // 1. Open Modal
+        triggerShare.addEventListener('click', () => {
+            modal.classList.add('active');
+            showStep(stepPrompt);
+        });
+
+        // 2. User clicks "No" -> Go straight to LinkedIn
+        btnNo.addEventListener('click', openLinkedInShare);
+
+        // 3. User clicks "Yes" -> Show loading, then show text area
+        btnYes.addEventListener('click', () => {
+            showStep(stepLoading);
+            
+            // Simulate API call delay (1.5 seconds)
+            setTimeout(() => {
+                aiCaptionText.value = mockGeneratedCaption;
+                showStep(stepResult);
+            }, 1500);
+        });
+
+        // 4. User clicks "Copy" -> Copy to clipboard using modern API
+        btnCopy.addEventListener('click', () => {
+            navigator.clipboard.writeText(aiCaptionText.value).then(() => {
+                const originalText = btnCopy.innerText;
+                btnCopy.innerText = '✅ Copied!';
+                btnCopy.style.backgroundColor = '#28a745';
+                btnCopy.style.color = 'white';
+                
+                // Reset button text after 2 seconds
+                setTimeout(() => {
+                    btnCopy.innerText = originalText;
+                    btnCopy.style.backgroundColor = '';
+                    btnCopy.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert("Failed to copy. Please manually select and copy the text.");
+            });
+        });
+
+        // 5. User clicks "Go to LinkedIn" -> Open share window
+        btnPost.addEventListener('click', openLinkedInShare);
+
+        // 6. Cancel button
+        btnCancel.addEventListener('click', closeModal);
+
+        // 7. Close modal if clicking outside the content box
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
