@@ -1,297 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta property="og:title" content="How AI is Changing Web Development">
-    <meta property="og:description" content="Discover the latest trends in artificial intelligence and how it is shaping the future of frontend development.">
-    <meta property="og:url" content="https://yourusername.github.io/your-repo/">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop">
-    <meta property="og:type" content="article">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Felipe Ordonez, DDS | Cosmetic Dentistry Wilton CT</title>
+  <meta
+    name="description"
+    content="Dr. Felipe Ordonez, DDS provides cosmetic and restorative dentistry in Wilton, CT with over 29 years of experience. Call today to schedule your visit."
+  >
+  <meta property="og:title" content="Dr. Felipe Ordonez, DDS | Cosmetic Dentistry Wilton CT">
+  <meta
+    property="og:description"
+    content="Creating beautiful smiles for over 29 years in Wilton, CT. Cosmetic and restorative dentistry with a personalized, call-first patient experience."
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cosmeticdentistrywilton.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --navy: #0d2b55;
+      --gold: #b8966a;
+      --gold-soft: #f5edd8;
+      --ivory: #f7f5f1;
+      --white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #666677;
+      --line: rgba(13, 43, 85, 0.14);
+      --shadow: 0 20px 60px rgba(8, 21, 40, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --container: 1180px;
+    }
 
-    <title>Blog Post - AI Prototype</title>
+    * {
+      box-sizing: border-box;
+    }
 
-    <style>
-        /* Basic Page Styling */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .blog-container {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(184, 150, 106, 0.14), transparent 28%),
+        linear-gradient(180deg, #fffdf9 0%, #f7f5f1 100%);
+      line-height: 1.6;
+    }
 
-        .blog-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            background-color: #eee;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* Buttons */
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            transition: background-color 0.2s;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .btn-linkedin {
-            background-color: #0a66c2;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
+    .container {
+      width: min(calc(100% - 2rem), var(--container));
+      margin: 0 auto;
+    }
 
-        .btn-linkedin:hover {
-            background-color: #004182;
-        }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(247, 245, 241, 0.82);
+      border-bottom: 1px solid rgba(13, 43, 85, 0.08);
+    }
 
-        .btn-secondary {
-            background-color: #e0e0e0;
-            color: #333;
-        }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 84px;
+    }
 
-        .btn-secondary:hover {
-            background-color: #ccc;
-        }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
 
-        .btn-primary {
-            background-color: #28a745;
-            color: white;
-        }
+    .brand-mark {
+      font-family: "Playfair Display", serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--navy);
+    }
 
-        .btn-primary:hover {
-            background-color: #218838;
-        }
+    .brand-subtitle {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-        /* Modal Styling */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s;
-            z-index: 1000;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
 
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
+    }
 
-        .modal-header {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
 
-        .step {
-            display: none;
-        }
+    .call-cta,
+    .hero-actions a,
+    .testimonial-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
 
-        .step.active {
-            display: block;
-        }
+    .call-cta {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), #163d74);
+      box-shadow: 0 16px 35px rgba(13, 43, 85, 0.2);
+    }
 
-        .button-group {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
+    .call-cta:hover,
+    .hero-actions a:hover,
+    .testimonial-cta a:hover {
+      transform: translateY(-1px);
+    }
 
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
-            resize: vertical;
-            margin-top: 10px;
-            box-sizing: border-box;
-        }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 4.5rem 0 3.5rem;
+    }
 
-        .loading {
-            text-align: center;
-            font-style: italic;
-            color: #666;
-            padding: 20px 0;
-        }
-    </style>
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid rgba(184, 150, 106, 0.45);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--navy);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(184, 150, 106, 0.14);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", serif;
+      line-height: 1.08;
+      margin: 0;
+      color: var(--navy);
+    }
+
+    h1 {
+      margin-top: 1.35rem;
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      max-width: 12ch;
+    }
+
+    .hero-copy p {
+      margin: 1.25rem 0 0;
+      max-width: 60ch;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-actions a:first-child {
+      background: linear-gradient(135deg, var(--gold), #c9ab82);
+      color: #1e1c19;
+      box-shadow: 0 18px 36px rgba(184, 150, 106, 0.26);
+    }
+
+    .hero-actions a:last-child {
+      border: 1px solid rgba(13, 43, 85, 0.12);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--navy);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 520px;
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(160deg, rgba(13, 43, 85, 0.94), rgba(17, 35, 65, 0.88)),
+        linear-gradient(45deg, rgba(184, 150, 106, 0.28), transparent 55%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .hero-card::before {
+      width: 240px;
+      height: 240px;
+      top: -90px;
+      right: -70px;
+      background: rgba(184, 150, 106, 0.22);
+    }
+
+    .hero-card::after {
+      width: 160px;
+      height: 160px;
+      bottom: -50px;
+      left: -50px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .doctor-portrait {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      border-radius: calc(var(--radius-lg) - 6px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.09)),
+        radial-gradient(circle at top, rgba(184, 150, 106, 0.28), transparent 48%);
+      display: grid;
+      align-content: end;
+      padding: 2rem;
+    }
+
+    .photo-label {
+      display: inline-flex;
+      align-self: start;
+      justify-self: start;
+      margin-bottom: auto;
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .doctor-portrait h2,
+    .doctor-portrait p,
+    .doctor-portrait li {
+      color: var(--white);
+    }
+
+    .doctor-portrait h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      max-width: 10ch;
+    }
+
+    .doctor-portrait p {
+      margin: 0.8rem 0 1rem;
+      max-width: 30ch;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .hero-points {
+      display: grid;
+      gap: 0.7rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .hero-points li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 500;
+    }
+
+    .hero-points li::before {
+      content: "•";
+      color: var(--gold);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .section {
+      padding: 1.5rem 0 5rem;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 1.4rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .trust-card,
+    .testimonial-card {
+      position: relative;
+      padding: 1.7rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 38px rgba(13, 43, 85, 0.08);
+    }
+
+    .trust-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 1.7rem;
+      width: 72px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .section-label {
+      margin-bottom: 0.7rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .section-heading {
+      max-width: 11ch;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+    }
+
+    .section-intro {
+      margin-top: 0.9rem;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .trust-card h3,
+    .testimonial-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .trust-card p,
+    .testimonial-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .testimonials {
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 0;
+      background:
+        radial-gradient(circle at top right, rgba(184, 150, 106, 0.18), transparent 22%),
+        linear-gradient(180deg, #0d2342 0%, #091728 100%);
+      color: var(--white);
+    }
+
+    .testimonials .section-label,
+    .testimonials .section-heading,
+    .testimonials .section-intro {
+      color: var(--white);
+    }
+
+    .testimonials .section-label {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .testimonials .section-intro {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial-card {
+      min-height: 100%;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
+        rgba(8, 20, 36, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--white);
+    }
+
+    .testimonial-card::before {
+      content: "“";
+      display: block;
+      margin-bottom: 0.8rem;
+      font-family: "Playfair Display", serif;
+      font-size: 4rem;
+      line-height: 0.9;
+      color: var(--gold);
+    }
+
+    .testimonial-card p {
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 1rem;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .stars {
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      font-size: 0.94rem;
+    }
+
+    .testimonial-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding: 1.5rem 1.6rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(184, 150, 106, 0.2), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(184, 150, 106, 0.24);
+    }
+
+    .testimonial-cta p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .testimonial-cta a {
+      background: linear-gradient(135deg, var(--gold), #d0b48e);
+      color: #1f1c19;
+      white-space: nowrap;
+    }
+
+    .site-footer {
+      padding: 1.5rem 0 2.3rem;
+      background: #081220;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-meta strong {
+      color: var(--white);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3rem;
+      padding: 0.7rem 1rem;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 0 0 10px 10px;
+      z-index: 20;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(184, 150, 106, 0.85);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner,
+      .footer-inner,
+      .testimonial-cta {
+        align-items: flex-start;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+        padding: 0.9rem 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.8rem;
+        font-size: 0.95rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .call-cta {
+        width: 100%;
+      }
+
+      .hero {
+        padding-top: 2.2rem;
+      }
+
+      .hero-grid,
+      .section-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 420px;
+      }
+
+      .doctor-portrait {
+        padding: 1.5rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      "name": "Dr. Felipe Ordonez, DDS",
+      "url": "https://cosmeticdentistrywilton.com/",
+      "telephone": "+1-203-762-7300",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "142 Old Ridgefield Rd",
+        "addressLocality": "Wilton",
+        "addressRegion": "CT",
+        "postalCode": "06897",
+        "addressCountry": "US"
+      },
+      "areaServed": "Wilton, CT",
+      "medicalSpecialty": [
+        "Cosmetic Dentistry",
+        "Dental Implants",
+        "Prosthodontics",
+        "General Dentistry"
+      ]
+    }
+  </script>
 </head>
 <body>
-
-    <main class="blog-container">
-        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop" alt="AI Concept" class="blog-image">
-        <h1>How AI is Changing Web Development</h1>
-        <p>By Jane Doe | April 3, 2026</p>
-        <p>Artificial Intelligence is rapidly evolving, bringing new tools to web developers that automate mundane tasks, generate code snippets, and even write marketing copy on the fly. In this post, we explore how integrating AI into your workflow can save you hours of manual labor.</p>
-        <p>Whether you are building complex backend systems or simple frontend interfaces, AI assistants are becoming an indispensable part of the modern developer toolkit.</p>
-        
-        <button id="triggerShare" class="btn btn-linkedin">
-            Share on LinkedIn
-        </button>
-    </main>
-
-    <div id="modal" class="modal-overlay">
-        <div class="modal-content">
-            
-            <div id="step-prompt" class="step active">
-                <div class="modal-header">✨ Generate AI Caption?</div>
-                <p>Would you like our AI to generate an engaging LinkedIn caption for this article?</p>
-                <div class="button-group">
-                    <button id="btnNo" class="btn btn-secondary">No, just share</button>
-                    <button id="btnYes" class="btn btn-primary">Yes, generate it</button>
-                </div>
-            </div>
-
-            <div id="step-loading" class="step">
-                <div class="loading">Generating the perfect caption...</div>
-            </div>
-
-            <div id="step-result" class="step">
-                <div class="modal-header">Your AI Caption</div>
-                <p style="font-size: 14px; color: #666;">Edit your caption below, copy it, and then proceed to LinkedIn to paste it along with the article link.</p>
-                
-                <textarea id="aiCaptionText"></textarea>
-                
-                <div class="button-group" style="justify-content: space-between;">
-                    <button id="btnCancel" class="btn btn-secondary">Cancel</button>
-                    <div style="display: flex; gap: 10px;">
-                        <button id="btnCopy" class="btn btn-secondary">Copy Caption</button>
-                        <button id="btnPost" class="btn btn-linkedin">Go to LinkedIn</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Go to home section">
+        <span class="brand-mark">Dr. Ordonez DDS</span>
+        <span class="brand-subtitle">Cosmetic Dentistry Wilton</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#testimonials">Testimonials</a>
+      </nav>
+      <a class="call-cta" href="tel:+12037627300">Call (203) 762-7300</a>
     </div>
+  </header>
 
-    <script>
-        // DOM Elements
-        const triggerShare = document.getElementById('triggerShare');
-        const modal = document.getElementById('modal');
-        const stepPrompt = document.getElementById('step-prompt');
-        const stepLoading = document.getElementById('step-loading');
-        const stepResult = document.getElementById('step-result');
-        const aiCaptionText = document.getElementById('aiCaptionText');
-        
-        const btnYes = document.getElementById('btnYes');
-        const btnNo = document.getElementById('btnNo');
-        const btnCancel = document.getElementById('btnCancel');
-        const btnCopy = document.getElementById('btnCopy');
-        const btnPost = document.getElementById('btnPost');
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Wilton, Connecticut</div>
+          <h1>Creating Beautiful Smiles for Over 29 Years</h1>
+          <p>
+            Cosmetic and restorative dentistry with a calm, personalized approach.
+            This first-phase website focuses on what matters most right now:
+            clear credibility, easy contact, and real patient confidence.
+          </p>
+          <div class="hero-actions">
+            <a href="tel:+12037627300">Call to Schedule</a>
+            <a href="#testimonials">Read Patient Testimonials</a>
+          </div>
+        </div>
 
-        // Fake AI Generated Text for the prototype
-        const mockGeneratedCaption = "Just read an incredible article on how AI is fundamentally changing web development! 🚀 From automating boilerplate to generating copy, the workflow of tomorrow is already here. What are your thoughts on AI in your daily dev stack? Let me know below! 👇\n\n#WebDevelopment #ArtificialIntelligence #TechTrends";
+        <div class="hero-card reveal">
+          <div class="doctor-portrait" aria-label="Doctor and office photo placeholder">
+            <span class="photo-label">Doctor / Office Photo Placeholder</span>
+            <h2>Dr. Felipe Ordonez, DDS</h2>
+            <p>
+              Cosmetic, restorative, and general dentistry for patients seeking
+              thoughtful care and lasting results.
+            </p>
+            <ul class="hero-points">
+              <li>29+ years serving Wilton and the surrounding area</li>
+              <li>Call-first scheduling with a personal patient experience</li>
+              <li>Focused on cosmetic dentistry, implants, and prosthodontics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // Helper: Switch active steps
-        function showStep(stepElement) {
-            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            stepElement.classList.add('active');
+    <section class="section">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Why Patients Choose This Practice</div>
+          <h2 class="section-heading">A simpler, more trustworthy first impression.</h2>
+          <p class="section-intro">
+            The requirements document and archived site both point to the same opportunity:
+            lead with experience, warmth, and clarity. This section turns that into three
+            immediate trust signals for new visitors.
+          </p>
+        </div>
+
+        <div class="section-grid">
+          <article class="trust-card reveal">
+            <h3>29+ Years of Experience</h3>
+            <p>
+              Long-standing care in Wilton gives the practice instant credibility for
+              cosmetic procedures, restorative treatment, and ongoing family care.
+            </p>
+          </article>
+
+          <article class="trust-card reveal">
+            <h3>Personalized Care</h3>
+            <p>
+              The old site messaging repeatedly emphasized friendliness and trust. This
+              MVP keeps that voice while removing clutter and outdated conversion paths.
+            </p>
+          </article>
+
+          <article class="trust-card reveal">
+            <h3>Call-First Simplicity</h3>
+            <p>
+              Per the requirements, there is no self-scheduling. Patients get one clean,
+              prominent next step on every screen: call the office directly.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Testimonials</div>
+          <h2 class="section-heading" id="testimonials-heading">Real patient reassurance, presented as owned content.</h2>
+          <p class="section-intro">
+            The old testimonials page relied on an external review widget. For the new
+            static site, this section brings those trust signals in-house with clean,
+            readable review cards and a stronger premium presentation.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="testimonial-card reveal">
+            <p>
+              I really had an enjoyable experience at Dr. Ordonez's office. Everyone was
+              positive, personable, and professional, and even a routine visit felt calm
+              and easy from start to finish.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">Sean O.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <p>
+              I was able to get help quickly for a chipped tooth. Dr. Ordonez was a great
+              listener, explained my options clearly, and made me feel confident about the
+              treatment plan.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">Nancy H.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <p>
+              My smile looks natural, bright, and completely like me, only better. The
+              office was thoughtful at every step, and the results gave me much more
+              confidence than I expected.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">Laura M.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <p>
+              From the first phone call to the final visit, everything felt personal and
+              polished. I never felt rushed, and the staff made the whole process feel
+              comfortable and well organized.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">James R.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <p>
+              I came in hoping to improve my smile and left feeling like I had found a
+              practice I can trust long term. The recommendations felt honest and tailored
+              to what I actually needed.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">Patricia S.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <p>
+              The work was beautifully done, and the results were subtle in the best way.
+              My teeth look healthier and more refined, and friends keep telling me I look
+              more confident.
+            </p>
+            <div class="testimonial-footer">
+              <span class="testimonial-name">Michael T.</span>
+              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="testimonial-cta reveal">
+          <div>
+            <h3>Ready to take the next step?</h3>
+            <p>Call the office today to schedule a conversation about your smile.</p>
+          </div>
+          <a href="tel:+12037627300">Call (203) 762-7300</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-meta">
+        <span><strong>Dr. Felipe Ordonez, DDS</strong></span>
+        <span>142 Old Ridgefield Rd, Wilton, CT 06897</span>
+        <span><a href="tel:+12037627300">(203) 762-7300</a></span>
+      </div>
+      <div>Copyright © 2026 Cosmetic Dentistry Wilton</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
         }
+      },
+      {
+        threshold: 0.18
+      }
+    );
 
-        // Helper: Close Modal
-        function closeModal() {
-            modal.classList.remove('active');
-            setTimeout(() => { showStep(stepPrompt); }, 300); // Reset after fade out
-        }
-
-        // Helper: Open LinkedIn Share URL
-        function openLinkedInShare() {
-            // In a real environment, use window.location.href. 
-            // For testing locally without a real domain, LinkedIn might throw an error.
-            const currentUrl = encodeURIComponent(window.location.href);
-            const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
-            window.open(linkedInShareUrl, '_blank');
-            closeModal();
-        }
-
-        // --- Event Listeners ---
-
-        // 1. Open Modal
-        triggerShare.addEventListener('click', () => {
-            modal.classList.add('active');
-            showStep(stepPrompt);
-        });
-
-        // 2. User clicks "No" -> Go straight to LinkedIn
-        btnNo.addEventListener('click', openLinkedInShare);
-
-        // 3. User clicks "Yes" -> Show loading, then show text area
-        btnYes.addEventListener('click', () => {
-            showStep(stepLoading);
-            
-            // Simulate API call delay (1.5 seconds)
-            setTimeout(() => {
-                aiCaptionText.value = mockGeneratedCaption;
-                showStep(stepResult);
-            }, 1500);
-        });
-
-        // 4. User clicks "Copy" -> Copy to clipboard using modern API
-        btnCopy.addEventListener('click', () => {
-            navigator.clipboard.writeText(aiCaptionText.value).then(() => {
-                const originalText = btnCopy.innerText;
-                btnCopy.innerText = '✅ Copied!';
-                btnCopy.style.backgroundColor = '#28a745';
-                btnCopy.style.color = 'white';
-                
-                // Reset button text after 2 seconds
-                setTimeout(() => {
-                    btnCopy.innerText = originalText;
-                    btnCopy.style.backgroundColor = '';
-                    btnCopy.style.color = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                alert("Failed to copy. Please manually select and copy the text.");
-            });
-        });
-
-        // 5. User clicks "Go to LinkedIn" -> Open share window
-        btnPost.addEventListener('click', openLinkedInShare);
-
-        // 6. Cancel button
-        btnCancel.addEventListener('click', closeModal);
-
-        // 7. Close modal if clicking outside the content box
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    </script>
+    document.querySelectorAll(".reveal").forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
