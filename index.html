@@ -1,861 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr. Felipe Ordonez, DDS | Cosmetic Dentistry Wilton CT</title>
-  <meta
-    name="description"
-    content="Dr. Felipe Ordonez, DDS provides cosmetic and restorative dentistry in Wilton, CT with over 29 years of experience. Call today to schedule your visit."
-  >
-  <meta property="og:title" content="Dr. Felipe Ordonez, DDS | Cosmetic Dentistry Wilton CT">
-  <meta
-    property="og:description"
-    content="Creating beautiful smiles for over 29 years in Wilton, CT. Cosmetic and restorative dentistry with a personalized, call-first patient experience."
-  >
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://cosmeticdentistrywilton.com/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet"
-  >
-  <style>
-    :root {
-      --navy: #0d2b55;
-      --gold: #b8966a;
-      --gold-soft: #f5edd8;
-      --ivory: #f7f5f1;
-      --white: #ffffff;
-      --text: #1a1a2e;
-      --muted: #666677;
-      --line: rgba(13, 43, 85, 0.14);
-      --shadow: 0 20px 60px rgba(8, 21, 40, 0.12);
-      --radius-lg: 28px;
-      --radius-md: 18px;
-      --radius-sm: 12px;
-      --container: 1180px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(184, 150, 106, 0.14), transparent 28%),
-        linear-gradient(180deg, #fffdf9 0%, #f7f5f1 100%);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(calc(100% - 2rem), var(--container));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(247, 245, 241, 0.82);
-      border-bottom: 1px solid rgba(13, 43, 85, 0.08);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      min-height: 84px;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .brand-mark {
-      font-family: "Playfair Display", serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: var(--navy);
-    }
-
-    .brand-subtitle {
-      font-size: 0.82rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      font-weight: 500;
-      color: var(--navy);
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 0.25rem;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 180ms ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after {
-      transform: scaleX(1);
-    }
-
-    .call-cta,
-    .hero-actions a,
-    .testimonial-cta a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 50px;
-      padding: 0.9rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-    }
-
-    .call-cta {
-      color: var(--white);
-      background: linear-gradient(135deg, var(--navy), #163d74);
-      box-shadow: 0 16px 35px rgba(13, 43, 85, 0.2);
-    }
-
-    .call-cta:hover,
-    .hero-actions a:hover,
-    .testimonial-cta a:hover {
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 4.5rem 0 3.5rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-      gap: 2.2rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.5rem 0.9rem;
-      border: 1px solid rgba(184, 150, 106, 0.45);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      color: var(--navy);
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 6px rgba(184, 150, 106, 0.14);
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Playfair Display", serif;
-      line-height: 1.08;
-      margin: 0;
-      color: var(--navy);
-    }
-
-    h1 {
-      margin-top: 1.35rem;
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      max-width: 12ch;
-    }
-
-    .hero-copy p {
-      margin: 1.25rem 0 0;
-      max-width: 60ch;
-      font-size: 1.08rem;
-      color: var(--muted);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .hero-actions a:first-child {
-      background: linear-gradient(135deg, var(--gold), #c9ab82);
-      color: #1e1c19;
-      box-shadow: 0 18px 36px rgba(184, 150, 106, 0.26);
-    }
-
-    .hero-actions a:last-child {
-      border: 1px solid rgba(13, 43, 85, 0.12);
-      background: rgba(255, 255, 255, 0.82);
-      color: var(--navy);
-    }
-
-    .hero-card {
-      position: relative;
-      min-height: 520px;
-      padding: 1.4rem;
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(160deg, rgba(13, 43, 85, 0.94), rgba(17, 35, 65, 0.88)),
-        linear-gradient(45deg, rgba(184, 150, 106, 0.28), transparent 55%);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-card::before,
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .hero-card::before {
-      width: 240px;
-      height: 240px;
-      top: -90px;
-      right: -70px;
-      background: rgba(184, 150, 106, 0.22);
-    }
-
-    .hero-card::after {
-      width: 160px;
-      height: 160px;
-      bottom: -50px;
-      left: -50px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .doctor-portrait {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      border-radius: calc(var(--radius-lg) - 6px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.09)),
-        radial-gradient(circle at top, rgba(184, 150, 106, 0.28), transparent 48%);
-      display: grid;
-      align-content: end;
-      padding: 2rem;
-    }
-
-    .photo-label {
-      display: inline-flex;
-      align-self: start;
-      justify-self: start;
-      margin-bottom: auto;
-      padding: 0.55rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .doctor-portrait h2,
-    .doctor-portrait p,
-    .doctor-portrait li {
-      color: var(--white);
-    }
-
-    .doctor-portrait h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      max-width: 10ch;
-    }
-
-    .doctor-portrait p {
-      margin: 0.8rem 0 1rem;
-      max-width: 30ch;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .hero-points {
-      display: grid;
-      gap: 0.7rem;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .hero-points li {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 500;
-    }
-
-    .hero-points li::before {
-      content: "•";
-      color: var(--gold);
-      font-size: 1.4rem;
-      line-height: 1;
-    }
-
-    .section {
-      padding: 1.5rem 0 5rem;
-    }
-
-    .section-grid {
-      display: grid;
-      gap: 1.4rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 2rem;
-    }
-
-    .trust-card,
-    .testimonial-card {
-      position: relative;
-      padding: 1.7rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 38px rgba(13, 43, 85, 0.08);
-    }
-
-    .trust-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 1.7rem;
-      width: 72px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 999px;
-    }
-
-    .section-label {
-      margin-bottom: 0.7rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .section-heading {
-      max-width: 11ch;
-      font-size: clamp(2rem, 4vw, 3.3rem);
-    }
-
-    .section-intro {
-      margin-top: 0.9rem;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .trust-card h3,
-    .testimonial-card h3 {
-      font-size: 1.45rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .trust-card p,
-    .testimonial-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .testimonials {
-      position: relative;
-      overflow: hidden;
-      padding: 5rem 0;
-      background:
-        radial-gradient(circle at top right, rgba(184, 150, 106, 0.18), transparent 22%),
-        linear-gradient(180deg, #0d2342 0%, #091728 100%);
-      color: var(--white);
-    }
-
-    .testimonials .section-label,
-    .testimonials .section-heading,
-    .testimonials .section-intro {
-      color: var(--white);
-    }
-
-    .testimonials .section-label {
-      color: rgba(255, 255, 255, 0.72);
-    }
-
-    .testimonials .section-intro {
-      color: rgba(255, 255, 255, 0.76);
-    }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.4rem;
-      margin-top: 2rem;
-    }
-
-    .testimonial-card {
-      min-height: 100%;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
-        rgba(8, 20, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--white);
-    }
-
-    .testimonial-card::before {
-      content: "“";
-      display: block;
-      margin-bottom: 0.8rem;
-      font-family: "Playfair Display", serif;
-      font-size: 4rem;
-      line-height: 0.9;
-      color: var(--gold);
-    }
-
-    .testimonial-card p {
-      color: rgba(255, 255, 255, 0.84);
-      font-size: 1rem;
-    }
-
-    .testimonial-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1.2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .testimonial-name {
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    .stars {
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      font-size: 0.94rem;
-    }
-
-    .testimonial-cta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      padding: 1.5rem 1.6rem;
-      border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(184, 150, 106, 0.2), rgba(255, 255, 255, 0.05));
-      border: 1px solid rgba(184, 150, 106, 0.24);
-    }
-
-    .testimonial-cta p {
-      margin: 0;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .testimonial-cta a {
-      background: linear-gradient(135deg, var(--gold), #d0b48e);
-      color: #1f1c19;
-      white-space: nowrap;
-    }
-
-    .site-footer {
-      padding: 1.5rem 0 2.3rem;
-      background: #081220;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-
-    .footer-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem 1.4rem;
-      font-size: 0.95rem;
-    }
-
-    .footer-meta strong {
-      color: var(--white);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px) scale(0.985);
-      transition: opacity 600ms ease, transform 600ms ease;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -3rem;
-      padding: 0.7rem 1rem;
-      background: var(--navy);
-      color: var(--white);
-      border-radius: 0 0 10px 10px;
-      z-index: 20;
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid rgba(184, 150, 106, 0.85);
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 768px) {
-      .header-inner,
-      .footer-inner,
-      .testimonial-cta {
-        align-items: flex-start;
-      }
-
-      .header-inner {
-        flex-wrap: wrap;
-        padding: 0.9rem 0;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: space-between;
-        gap: 0.8rem;
-        font-size: 0.95rem;
-        overflow-x: auto;
-        padding-bottom: 0.2rem;
-      }
-
-      .call-cta {
-        width: 100%;
-      }
-
-      .hero {
-        padding-top: 2.2rem;
-      }
-
-      .hero-grid,
-      .section-grid,
-      .testimonial-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        min-height: 420px;
-      }
-
-      .doctor-portrait {
-        padding: 1.5rem;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
-    }
-  </style>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "name": "Dr. Felipe Ordonez, DDS",
-      "url": "https://cosmeticdentistrywilton.com/",
-      "telephone": "+1-203-762-7300",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "142 Old Ridgefield Rd",
-        "addressLocality": "Wilton",
-        "addressRegion": "CT",
-        "postalCode": "06897",
-        "addressCountry": "US"
-      },
-      "areaServed": "Wilton, CT",
-      "medicalSpecialty": [
-        "Cosmetic Dentistry",
-        "Dental Implants",
-        "Prosthodontics",
-        "General Dentistry"
-      ]
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Robing Room - Ad Submission Portal</title>
+    <style>
+        /* Modern CSS Reset & Styling */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --border-color: #dcdde1;
+            --text-color: #333;
+        }
+        body { 
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            line-height: 1.6; 
+            padding: 40px 20px; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: #fff; 
+            padding: 50px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
+        }
+        .header { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; }
+        .header h1 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 2rem; }
+        .header p { color: #666; margin: 0; }
+        
+        .form-section { margin-bottom: 35px; }
+        .form-section h3 { color: var(--primary-color); font-size: 1.25rem; margin-bottom: 20px; border-left: 4px solid var(--accent-color); padding-left: 10px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+        .help-text { font-size: 0.85rem; color: #7f8c8d; margin-top: 4px; display: block; font-weight: normal; }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="url"], select, textarea, input[type="file"] { 
+            width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; 
+            box-sizing: border-box; font-family: inherit; font-size: 1rem; transition: all 0.3s ease; 
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-color); outline: none; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15); }
+        
+        .placement-card { background: #f8f9fa; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+        .placement-card h4 { margin: 0 0 15px 0; color: #444; }
+        
+        .checkbox-group { display: flex; flex-direction: column; gap: 12px; }
+        .checkbox-group label, .radio-group label { font-weight: normal; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        
+        .radio-group { display: flex; gap: 30px; margin-bottom: 20px; }
+        .conditional-section { background: #fafbfc; border: 1px dashed var(--border-color); padding: 25px; border-radius: 8px; margin-top: 15px; }
+        
+        button { background-color: var(--accent-color); color: white; padding: 16px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: background-color 0.3s; margin-top: 20px; }
+        button:hover { background-color: #2980b9; }
+
+        @media (max-width: 600px) {
+            .grid-2, .radio-group { grid-template-columns: 1fr; flex-direction: column; gap: 15px; }
+            .container { padding: 30px 20px; }
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="Go to home section">
-        <span class="brand-mark">Dr. Ordonez DDS</span>
-        <span class="brand-subtitle">Cosmetic Dentistry Wilton</span>
-      </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#testimonials">Testimonials</a>
-      </nav>
-      <a class="call-cta" href="tel:+12037627300">Call (203) 762-7300</a>
+
+<div class="container">
+    <div class="header">
+        <h1>Advertise With Us</h1>
+        <p>Reach the legal community on The Robing Room</p>
     </div>
-  </header>
 
-  <main id="main">
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="eyebrow">Wilton, Connecticut</div>
-          <h1>Creating Beautiful Smiles for Over 29 Years</h1>
-          <p>
-            Cosmetic and restorative dentistry with a calm, personalized approach.
-            This first-phase website focuses on what matters most right now:
-            clear credibility, easy contact, and real patient confidence.
-          </p>
-          <div class="hero-actions">
-            <a href="tel:+12037627300">Call to Schedule</a>
-            <a href="#testimonials">Read Patient Testimonials</a>
-          </div>
-        </div>
-
-        <div class="hero-card reveal">
-          <div class="doctor-portrait" aria-label="Doctor and office photo placeholder">
-            <span class="photo-label">Doctor / Office Photo Placeholder</span>
-            <h2>Dr. Felipe Ordonez, DDS</h2>
-            <p>
-              Cosmetic, restorative, and general dentistry for patients seeking
-              thoughtful care and lasting results.
-            </p>
-            <ul class="hero-points">
-              <li>29+ years serving Wilton and the surrounding area</li>
-              <li>Call-first scheduling with a personal patient experience</li>
-              <li>Focused on cosmetic dentistry, implants, and prosthodontics</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <div class="section-label">Why Patients Choose This Practice</div>
-          <h2 class="section-heading">A simpler, more trustworthy first impression.</h2>
-          <p class="section-intro">
-            The requirements document and archived site both point to the same opportunity:
-            lead with experience, warmth, and clarity. This section turns that into three
-            immediate trust signals for new visitors.
-          </p>
-        </div>
-
-        <div class="section-grid">
-          <article class="trust-card reveal">
-            <h3>29+ Years of Experience</h3>
-            <p>
-              Long-standing care in Wilton gives the practice instant credibility for
-              cosmetic procedures, restorative treatment, and ongoing family care.
-            </p>
-          </article>
-
-          <article class="trust-card reveal">
-            <h3>Personalized Care</h3>
-            <p>
-              The old site messaging repeatedly emphasized friendliness and trust. This
-              MVP keeps that voice while removing clutter and outdated conversion paths.
-            </p>
-          </article>
-
-          <article class="trust-card reveal">
-            <h3>Call-First Simplicity</h3>
-            <p>
-              Per the requirements, there is no self-scheduling. Patients get one clean,
-              prominent next step on every screen: call the office directly.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
-      <div class="container">
-        <div class="reveal">
-          <div class="section-label">Testimonials</div>
-          <h2 class="section-heading" id="testimonials-heading">Real patient reassurance, presented as owned content.</h2>
-          <p class="section-intro">
-            The old testimonials page relied on an external review widget. For the new
-            static site, this section brings those trust signals in-house with clean,
-            readable review cards and a stronger premium presentation.
-          </p>
-        </div>
-
-        <div class="testimonial-grid">
-          <article class="testimonial-card reveal">
-            <p>
-              I really had an enjoyable experience at Dr. Ordonez's office. Everyone was
-              positive, personable, and professional, and even a routine visit felt calm
-              and easy from start to finish.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">Sean O.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+    <form action="#" method="POST" enctype="multipart/form-data">
+        
+        <!-- Section 1: Advertiser Information -->
+        <div class="form-section">
+            <h3>1. Advertiser Information</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="business-name">Business Name *</label>
+                    <input type="text" id="business-name" name="business_name" required placeholder="e.g., Apex Legal Services">
+                </div>
+                <div class="form-group">
+                    <label for="business-type">Business Category *</label>
+                    <select id="business-type" name="business_type" required>
+                        <option value="">Select a category...</option>
+                        <option value="law-firm">Law Firm</option>
+                        <option value="legal-tech">Legal Technology / Software</option>
+                        <option value="recruiting">Legal Recruiting</option>
+                        <option value="consulting">Consulting Services</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
             </div>
-          </article>
-
-          <article class="testimonial-card reveal">
-            <p>
-              I was able to get help quickly for a chipped tooth. Dr. Ordonez was a great
-              listener, explained my options clearly, and made me feel confident about the
-              treatment plan.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">Nancy H.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            <div class="form-group">
+                <label for="contact-name">Contact Person Name *</label>
+                <input type="text" id="contact-name" name="contact_name" required>
             </div>
-          </article>
-
-          <article class="testimonial-card reveal">
-            <p>
-              My smile looks natural, bright, and completely like me, only better. The
-              office was thoughtful at every step, and the results gave me much more
-              confidence than I expected.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">Laura M.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
             </div>
-          </article>
-
-          <article class="testimonial-card reveal">
-            <p>
-              From the first phone call to the final visit, everything felt personal and
-              polished. I never felt rushed, and the staff made the whole process feel
-              comfortable and well organized.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">James R.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-            </div>
-          </article>
-
-          <article class="testimonial-card reveal">
-            <p>
-              I came in hoping to improve my smile and left feeling like I had found a
-              practice I can trust long term. The recommendations felt honest and tailored
-              to what I actually needed.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">Patricia S.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-            </div>
-          </article>
-
-          <article class="testimonial-card reveal">
-            <p>
-              The work was beautifully done, and the results were subtle in the best way.
-              My teeth look healthier and more refined, and friends keep telling me I look
-              more confident.
-            </p>
-            <div class="testimonial-footer">
-              <span class="testimonial-name">Michael T.</span>
-              <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-            </div>
-          </article>
         </div>
 
-        <div class="testimonial-cta reveal">
-          <div>
-            <h3>Ready to take the next step?</h3>
-            <p>Call the office today to schedule a conversation about your smile.</p>
-          </div>
-          <a href="tel:+12037627300">Call (203) 762-7300</a>
+        <!-- Section 2: Ad Placement Selection -->
+        <div class="form-section">
+            <h3>2. Ad Placement</h3>
+            
+            <div class="placement-card">
+                <h4>Sidebar Image (970 x 530 pixels)</h4>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="placement" value="home_page"> Home Page</label>
+                    <label><input type="checkbox" name="placement" value="blog_home"> Blog Home Page</label>
+                    <label><input type="checkbox" name="placement" value="blog_login"> Blog Login Page</label>
+                </div>
+            </div>
+
+            <div class="placement-card">
+                <h4>Full-Width Banner (2560 x 265 pixels)</h4>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="placement" value="judge_review"> Judge Review Page</label>
+                    <label><input type="checkbox" name="placement" value="blog_post"> Blog Post Page</label>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-meta">
-        <span><strong>Dr. Felipe Ordonez, DDS</strong></span>
-        <span>142 Old Ridgefield Rd, Wilton, CT 06897</span>
-        <span><a href="tel:+12037627300">(203) 762-7300</a></span>
-      </div>
-      <div>Copyright © 2026 Cosmetic Dentistry Wilton</div>
-    </div>
-  </footer>
+        <!-- Section 3: Ad Creative -->
+        <div class="form-section">
+            <h3>3. Ad Creative & Destination</h3>
+            
+            <div class="form-group">
+                <label for="redirect-url">Target URL (Where should the ad link to?) *</label>
+                <input type="url" id="redirect-url" name="redirect_url" required placeholder="https://www.yourwebsite.com">
+            </div>
 
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      {
-        threshold: 0.18
-      }
-    );
+            <div class="form-group">
+                <label>Creative Format *</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="creative_type" value="upload" checked> Upload Finished Ad Image</label>
+                    <label><input type="radio" name="creative_type" value="build"> Provide Details (We'll format it)</label>
+                </div>
+            </div>
 
-    document.querySelectorAll(".reveal").forEach((element) => {
-      observer.observe(element);
-    });
-  </script>
+            <!-- Option A: Upload Finished Image -->
+            <div class="conditional-section" id="upload-section">
+                <div class="form-group">
+                    <label for="ad-image">Upload Ad Image <span class="help-text">Ensure dimensions match your selected placement (970x530 or 2560x265). Format: JPG or PNG.</span></label>
+                    <input type="file" id="ad-image" name="ad_image" accept="image/png, image/jpeg">
+                </div>
+            </div>
+
+            <!-- Option B: Provide Details -->
+            <div class="conditional-section" id="build-section">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="company-logo">Company Logo Image</label>
+                        <input type="file" id="company-logo" name="company_logo" accept="image/png, image/jpeg">
+                    </div>
+                    <div class="form-group">
+                        <label for="display-name">Display Company Name</label>
+                        <input type="text" id="display-name" name="display_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ad-header">Ad Headline</label>
+                    <input type="text" id="ad-header" name="ad_header" placeholder="Catchy headline for your ad">
+                </div>
+                <div class="form-group">
+                    <label for="ad-description">Ad Description</label>
+                    <textarea id="ad-description" name="ad_description" rows="3" placeholder="Brief description of your services or offer..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit">Submit Advertisement Request</button>
+    </form>
+</div>
+
 </body>
 </html>
