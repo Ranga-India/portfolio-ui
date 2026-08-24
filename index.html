@@ -7,11 +7,11 @@
     <style>
         /* Compact & Modern CSS */
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
+            --primary-color: #1a365d;
+            --accent-color: #2b6cb0;
             --bg-color: #f4f7f6;
-            --border-color: #dcdde1;
-            --text-color: #333;
+            --border-color: #e2e8f0;
+            --text-color: #2d3748;
         }
         body { 
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -27,11 +27,29 @@
             margin: 0 auto; 
             background: #fff; 
             padding: 25px 35px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-radius: 10px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
         }
-        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
-        .header h1 { color: var(--primary-color); margin: 0 0 5px 0; font-size: 1.6rem; }
+        
+        /* Enhanced Header */
+        .header { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 20px; 
+        }
+        .header h1 { 
+            color: var(--primary-color); 
+            margin: 0 0 8px 0; 
+            font-size: 1.8rem; 
+            letter-spacing: -0.5px;
+        }
+        .header p.tagline {
+            color: #4a5568;
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
         
         .form-section { margin-bottom: 25px; }
         .form-section h3 { color: var(--primary-color); font-size: 1.1rem; margin-bottom: 12px; border-left: 3px solid var(--accent-color); padding-left: 8px; }
@@ -40,25 +58,37 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         
         label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem; }
-        .help-text { font-size: 0.8rem; color: #7f8c8d; margin-top: 2px; display: block; font-weight: normal; }
+        .help-text { font-size: 0.8rem; color: #718096; margin-top: 2px; display: block; font-weight: normal; }
         
         input[type="text"], input[type="email"], input[type="tel"], input[type="url"], select, textarea, input[type="file"] { 
-            width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; 
+            width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; 
             box-sizing: border-box; font-family: inherit; font-size: 0.95rem; transition: all 0.2s ease; 
         }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-color); outline: none; box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15); }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-color); outline: none; box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15); }
         
-        .placement-card { background: #f8f9fa; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px 15px; margin-bottom: 10px; }
-        .placement-card h4 { margin: 0 0 10px 0; color: #444; font-size: 0.95rem;}
+        .placement-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; margin-top: 10px; }
+        .placement-card h4 { margin: 0 0 12px 0; color: #2d3748; font-size: 0.95rem;}
         
-        .radio-list { display: flex; flex-direction: column; gap: 8px; }
-        .radio-list label, .radio-group label { font-weight: normal; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem; }
+        .checkbox-list { display: flex; flex-direction: column; gap: 10px; }
+        .checkbox-list label, .radio-group label { font-weight: normal; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem; }
         
-        .radio-group { display: flex; gap: 20px; margin-bottom: 10px; }
-        .conditional-section { background: #fafbfc; border: 1px dashed var(--border-color); padding: 15px; border-radius: 6px; margin-top: 10px; }
+        /* Show Links */
+        .show-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-left: 4px;
+            font-weight: 500;
+        }
+        .show-link:hover { text-decoration: underline; }
+        .show-link::before { content: "("; color: #718096; }
+        .show-link::after { content: ")"; color: #718096; }
+
+        .radio-group { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
+        .conditional-section { background: #f8fafc; border: 1px dashed var(--border-color); padding: 15px; border-radius: 6px; margin-top: 10px; }
         
-        button { background-color: var(--accent-color); color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; transition: background-color 0.2s; margin-top: 10px; }
-        button:hover { background-color: #2980b9; }
+        button { background-color: var(--accent-color); color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; transition: background-color 0.2s; margin-top: 10px; }
+        button:hover { background-color: #1a365d; }
 
         @media (max-width: 600px) {
             .grid-2, .radio-group { grid-template-columns: 1fr; flex-direction: column; gap: 10px; }
@@ -71,6 +101,7 @@
 <div class="container">
     <div class="header">
         <h1>Advertise with The Robing Room</h1>
+        <p class="tagline">Connect your brand with thousands of legal professionals across our platform.</p>
     </div>
 
     <form action="#" method="POST" enctype="multipart/form-data">
@@ -109,24 +140,47 @@
 
         <!-- Section 2: Ad Placement Selection -->
         <div class="form-section">
-            <h3>2. Select Ad Placement (Choose One)</h3>
+            <h3>2. Ad Placement</h3>
             
-            <div class="grid-2">
-                <div class="placement-card">
-                    <h4>Sidebar Image (970 x 530)</h4>
-                    <div class="radio-list">
-                        <label><input type="radio" name="placement" value="home_page" required> Home Page</label>
-                        <label><input type="radio" name="placement" value="blog_home"> Blog Home Page</label>
-                        <label><input type="radio" name="placement" value="blog_login"> Blog Login Page</label>
-                    </div>
+            <div class="form-group">
+                <label>Select Ad Format *</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="format_type" id="format-sidebar" value="sidebar" checked> Sidebar Image (970 x 530)</label>
+                    <label><input type="radio" name="format_type" id="format-banner" value="banner"> Full-Width Banner (2560 x 265)</label>
                 </div>
+            </div>
 
-                <div class="placement-card">
-                    <h4>Full-Width Banner (2560 x 265)</h4>
-                    <div class="radio-list">
-                        <label><input type="radio" name="placement" value="judge_review"> Judge Review Page</label>
-                        <label><input type="radio" name="placement" value="blog_post"> Blog Post Page</label>
-                    </div>
+            <!-- Sidebar Target Pages -->
+            <div class="placement-card" id="sidebar-pages">
+                <h4>Select Target Pages (Multiple allowed)</h4>
+                <div class="checkbox-list">
+                    <label>
+                        <input type="checkbox" name="sidebar_target[]" value="home_page"> Home Page
+                        <a href="https://therobingroom.com/" target="_blank" class="show-link">show</a>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="sidebar_target[]" value="blog_home"> Blog Home Page
+                        <a href="https://therobingroom.com/blog/feed" target="_blank" class="show-link">show</a>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="sidebar_target[]" value="blog_login"> Blog Login Page
+                        <a href="https://therobingroom.com/blog/login" target="_blank" class="show-link">show</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Banner Target Pages -->
+            <div class="placement-card" id="banner-pages" style="display: none;">
+                <h4>Select Target Pages (Multiple allowed)</h4>
+                <div class="checkbox-list">
+                    <label>
+                        <input type="checkbox" name="banner_target[]" value="judge_review"> Judge Review Page
+                        <a href="https://therobingroom.com/federal-judges/2082/Hon.%20Analisa%20Torres/comments" target="_blank" class="show-link">show</a>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="banner_target[]" value="blog_post"> Blog Post Page
+                        <a href="https://therobingroom.com/blog/posts/soon-you-may-apply-to-restore-your-federal-firearm-rights" target="_blank" class="show-link">show</a>
+                    </label>
                 </div>
             </div>
         </div>
@@ -144,7 +198,7 @@
                 <label>Creative Format *</label>
                 <div class="radio-group">
                     <label><input type="radio" name="creative_type" id="type-upload" value="upload" checked> Upload my ad</label>
-                    <label><input type="radio" name="creative_type" id="type-build" value="build"> Provide details</label>
+                    <label><input type="radio" name="creative_type" id="type-build" value="build"> Provide details (We will create an ad for you)</label>
                 </div>
             </div>
 
@@ -183,9 +237,10 @@
     </form>
 </div>
 
-<!-- JavaScript to handle dynamic showing/hiding of creative sections -->
+<!-- JavaScript to handle dynamic showing/hiding of sections -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Creative Format Logic
         const uploadRadio = document.getElementById('type-upload');
         const buildRadio = document.getElementById('type-build');
         const uploadSection = document.getElementById('upload-section');
@@ -203,6 +258,29 @@
 
         uploadRadio.addEventListener('change', toggleCreativeSections);
         buildRadio.addEventListener('change', toggleCreativeSections);
+
+        // Ad Format / Placement Logic
+        const formatSidebar = document.getElementById('format-sidebar');
+        const formatBanner = document.getElementById('format-banner');
+        const sidebarPages = document.getElementById('sidebar-pages');
+        const bannerPages = document.getElementById('banner-pages');
+
+        function togglePlacementSections() {
+            if (formatSidebar.checked) {
+                sidebarPages.style.display = 'block';
+                bannerPages.style.display = 'none';
+                // Optional: Uncheck hidden banner boxes
+                document.querySelectorAll('input[name="banner_target[]"]').forEach(cb => cb.checked = false);
+            } else {
+                sidebarPages.style.display = 'none';
+                bannerPages.style.display = 'block';
+                // Optional: Uncheck hidden sidebar boxes
+                document.querySelectorAll('input[name="sidebar_target[]"]').forEach(cb => cb.checked = false);
+            }
+        }
+
+        formatSidebar.addEventListener('change', togglePlacementSections);
+        formatBanner.addEventListener('change', togglePlacementSections);
     });
 </script>
 
